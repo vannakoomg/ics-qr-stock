@@ -1,10 +1,24 @@
 part of 'login_bloc.dart';
 
+class LoginEvent extends BaseEvent {}
+
 @freezed
-class LoginEvent extends BaseEvent with _$LoginEvent {
-  const factory LoginEvent.EmailChangedEvent(String email) = _EmailChangedEvent;
-  const factory LoginEvent.passwordChanged(String password) = _PasswordChanged;
-  const factory LoginEvent.clickedButtonLogin() = _ClickedButtonLogin;
-  const factory LoginEvent.clickLoginWithGmail() = _ClickLoginWithGmail;
-  const factory LoginEvent.clickForgotPassword() = _ClickForgotPassword;
+class UserNameChange extends LoginEvent with _$UserNameChange {
+  factory UserNameChange(String value) = _UserNameChange;
+}
+
+@freezed
+class PasswordChange extends LoginEvent with _$PasswordChange {
+  factory PasswordChange(String value) = _PasswordChange;
+}
+
+@freezed
+class ClickButtonLogin extends LoginEvent with _$ClickButtonLogin {
+  factory ClickButtonLogin() = _ClickButtonLogin;
+}
+
+@freezed
+class TogglePasswordVisibility extends LoginEvent
+    with _$TogglePasswordVisibility {
+  factory TogglePasswordVisibility() = _TogglePasswordVisibility;
 }

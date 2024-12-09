@@ -12,7 +12,7 @@ class AppColor {
   static const Color textFieldFocusedBorderColor =
       Color.fromARGB(255, 248, 99, 154);
   // for widget
-  static const Color primaryColor = Color.fromARGB(255, 219, 85, 100);
+  static const Color primaryColor = Color.fromARGB(255, 0, 98, 154);
   static const Color secondnaryColor = Color(0xFFd81159);
   static const Color onPrimary = Color(0xFFE9E9E9);
   static const Color onSecondary = Color(0xFFE9E9E9);

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart';
 import 'package:sos_mobile/app/global_tapped_builder.dart';
 import 'package:sos_mobile/config/router/app_router.dart';
 import 'package:sos_mobile/core/utils/log/app_logger.dart';
 import 'package:sos_mobile/di/di.dart';
+import 'package:sos_mobile/features/login/presentation/bloc/login_bloc.dart';
 import 'package:sos_mobile/gen/i18n/translations.g.dart';
 
 import '../config/theme/theme_controller.dart';
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: (_) => getIt.get<ProfileBloc>()),
+        BlocProvider(create: (_) => getIt.get<LoginBloc>()),
         BlocProvider(create: (_) => getIt.get<ThemeController>()),
       ],
       child: BlocBuilder<ThemeController, ThemeMode>(

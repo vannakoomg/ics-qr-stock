@@ -5,7 +5,6 @@ import 'package:moon_design/moon_design.dart';
 import 'package:sos_mobile/di/di.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/core/constants/constants.dart';
-import 'package:sos_mobile/core/utils/widgets/custom_buttom.dart';
 import 'package:sos_mobile/gen/i18n/translations.g.dart';
 
 import '../../../app/base/navigation/app_navigator.dart';
@@ -36,12 +35,12 @@ class AppPopupInfoMapper extends BasePopupInfoMapper {
         actionsPadding: const EdgeInsets.all(kPadding2),
         content: Text(message ?? ''),
         actions: [
-          CustomButtom(
+          MoonButton(
             onTap: () {
               Navigator.pop(navigator.context);
             },
-            title: 'Back',
-          ),
+            label: const Text("Back"),
+          )
         ],
       ),
       //     FailureDialog(

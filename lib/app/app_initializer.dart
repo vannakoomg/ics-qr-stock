@@ -3,13 +3,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sos_mobile/di/di.dart';
 
 import '../core/constants/log_constant.dart';
 import '../core/helper/local_data/storge_local.dart';
-import '../core/helper/notification/listion_notification.dart';
 import '../core/utils/log/log_utils.dart';
 import '../core/utils/log/logger_helper.dart';
 
@@ -49,9 +46,6 @@ Future<void> _initSystemUIPreferences() async {
   // });
 }
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,7 +60,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
         debugPrint("--------------");
       },
     );
-    addNotification();
   }
 }
 
@@ -74,8 +67,6 @@ Future<void> _appConfig() async {
   await LocalStorage.init();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await dotenv.load(fileName: ".env");
-  listNotification();
   configureDependencies();
 }
 

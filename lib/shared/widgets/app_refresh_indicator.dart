@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:moon_design/moon_design.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sos_mobile/core/utils/widgets/custom_loading.dart';
 
 class AppSmartRefreshScrollView extends StatefulWidget {
   const AppSmartRefreshScrollView({
@@ -50,7 +50,7 @@ class _AppSmartRefreshScrollViewState extends State<AppSmartRefreshScrollView> {
       header: CustomHeader(
         builder: (_, mode) => const Padding(
           padding: EdgeInsets.all(8.0),
-          child: Center(child: CustomLoading()),
+          child: Center(child: MoonCircularLoader()),
         ),
       ),
       footer: CustomFooter(

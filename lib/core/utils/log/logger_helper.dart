@@ -4,11 +4,9 @@ import 'dart:io';
 import 'package:flutter_logs/flutter_logs.dart' as logger;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:sos_mobile/core/utils/date_time_utils.dart';
 
 class LoggerHelper {
-  static String myLogFileName =
-      'RDBLogFile_${DateTime.now().toStringWithFormat('dd-MM-yyyy')}';
+  static String myLogFileName = 'RDBLogFile';
 
   static final Completer _completer = Completer<String>();
 

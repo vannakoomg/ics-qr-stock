@@ -41,9 +41,11 @@ dependencies:
   gallery_saver: ^2.3.2
   flutter_image_compress: ^2.1.0
   flutter_app_badger: ^1.5.0
-  image_picker: ^0.8.6+1
+  image_picker: 1.1.2
   path_provider: ^2.0.11
   url_launcher: ^6.3.0
+  ai_barcode_scanner: ^6.0.1
+
 
   # google service
   google_sign_in: ^6.1.5
