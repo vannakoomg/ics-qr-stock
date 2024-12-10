@@ -10,11 +10,7 @@ import 'package:sos_mobile/app/base/bloc/base_bloc.dart';
 import 'package:sos_mobile/app/base/bloc/base_event.dart';
 import 'package:sos_mobile/app/base/bloc/base_state.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
-import 'package:sos_mobile/core/constants/shared_preference_keys_constants.dart';
 import 'package:sos_mobile/features/login/domain/usecase/login_usecase.dart';
-
-import '../../../../core/helper/fuction.dart';
-import '../../../../core/helper/local_data/storge_local.dart';
 
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';

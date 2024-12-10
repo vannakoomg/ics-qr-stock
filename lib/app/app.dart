@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:sos_mobile/app/global_tapped_builder.dart';
 import 'package:sos_mobile/config/router/app_router.dart';
 import 'package:sos_mobile/core/utils/log/app_logger.dart';

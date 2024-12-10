@@ -1,7 +1,7 @@
-
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sos_mobile/di/di.dart';
 
 import '../core/constants/log_constant.dart';
@@ -45,11 +45,14 @@ Future<void> _initSystemUIPreferences() async {
   // });
 }
 
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
-
+@pragma('vm:entry-point')
 Future<void> _appConfig() async {
   await LocalStorage.init();
- 
+  await dotenv.load(fileName: ".env");
+  configureDependencies();
 }
 
 class AppBlocObserver extends BlocObserver with LogMixin {
