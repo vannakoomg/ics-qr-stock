@@ -6,4 +6,5 @@ part 'app_route_info.freezed.dart';
 @Freezed(when: FreezedWhenOptions(when: true))
 class AppRouteInfo with _$AppRouteInfo {
   const factory AppRouteInfo.login() = _Login;
+  const factory AppRouteInfo.scanStock() = _ScanStock;
 }

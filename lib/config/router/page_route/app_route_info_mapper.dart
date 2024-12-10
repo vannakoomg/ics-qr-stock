@@ -17,9 +17,8 @@ class AppRouteInfoMapper extends BaseRouteInfoMapper {
   @override
   PageRouteInfo map(AppRouteInfo appRouteInfo) {
     return appRouteInfo.when(
-      login: () {
-        return const LoginRoute();
-      },
+      login: () => const LoginRoute(),
+      scanStock: () => const ScanStockRoute(),
     );
   }
 }

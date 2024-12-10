@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sos_mobile/app/base/bloc/base_bloc.dart';
 import 'package:sos_mobile/app/base/bloc/base_event.dart';
 import 'package:sos_mobile/app/base/bloc/base_state.dart';
+import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/core/constants/shared_preference_keys_constants.dart';
 import 'package:sos_mobile/features/login/domain/usecase/login_usecase.dart';
 
@@ -52,16 +53,16 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       ClickButtonLogin event, Emitter<LoginState> emit) async {
     await runAppCatching(
       () async {
-        emit(state.copyWith(loading: true));
-        unFocus();
-        final input =
-            LoginInput(email: state.userName, password: state.password);
-        final loginEnity = await _loginUseCase.excecute(input);
-
-        await LocalStorage.storeData(
-          key: SharedPreferenceKeys.accessToken,
-          value: loginEnity.token,
-        );
+        // emit(state.copyWith(loading: true));
+        // unFocus();
+        // final input =
+        //     LoginInput(email: state.userName, password: state.password);
+        // final loginEnity = await _loginUseCase.excecute(input);
+        // await LocalStorage.storeData(
+        //   key: SharedPreferenceKeys.accessToken,
+        //   value: loginEnity.token,
+        // );
+        appRoute.push(const AppRouteInfo.scanStock());
       },
       onError: (e) async {
         emit(state.copyWith(loading: false));

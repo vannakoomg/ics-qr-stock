@@ -6,7 +6,6 @@ import 'package:moon_design/moon_design.dart';
 import 'package:sos_mobile/app/base/page/base_page_bloc_state.dart';
 import 'package:sos_mobile/core/constants/constants.dart';
 import 'package:sos_mobile/features/login/presentation/bloc/login_bloc.dart';
-import 'package:sos_mobile/features/scan_stock/scan_stock.dart';
 import 'package:sos_mobile/gen/i18n/translations.g.dart';
 
 @RoutePage()
@@ -74,14 +73,7 @@ class _LoginPageState extends BasePageBlocState<LoginPage, LoginBloc> {
                 ),
                 MoonButton(
                   onTap: () {
-                    // if (state.enableLogin) {
-                    //   bloc.add(ClickButtonLogin());
-                    // }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ScanStockPage()),
-                    );
+                    bloc.add(ClickButtonLogin());
                   },
                   isFullWidth: true,
                   label: state.loading
