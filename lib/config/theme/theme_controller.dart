@@ -29,17 +29,16 @@ class ThemeController extends Cubit<ThemeMode> {
     if (theme == "light") {
       LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "dark");
       changeTheme(ThemeMode.dark);
-    }
-    if (theme == "dark") {
-      LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "system");
+    } else {
+      LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "light");
       final brightness = WidgetsBinding.instance.window.platformBrightness;
       changeTheme(
           brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light);
     }
-    if (theme == "system") {
-      LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "light");
-      changeTheme(ThemeMode.light);
-    }
+    // if (theme == "system") {
+    //   LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "light");
+    //   changeTheme(ThemeMode.light);
+    // }
   }
 
   static ThemeMode _getInitialTheme() {

@@ -1,7 +1,8 @@
-
 part of 'splash_bloc.dart';
 
+class SplashEvent extends BaseEvent {}
+
 @freezed
-class SplashEvent extends BaseEvent with _$SplashEvent {
-  const factory SplashEvent.started() = _Started;
+class InitEvent extends SplashEvent with _$InitEvent {
+  factory InitEvent() = _InitEvent;
 }

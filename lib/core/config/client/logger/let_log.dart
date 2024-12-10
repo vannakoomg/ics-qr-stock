@@ -1,4 +1,4 @@
-// ignore_for_file: cascade_invocations, library_private_types_in_public_api
+// ignore_for_file: cascade_invocations, library_private_types_in_public_api, unused_element
 
 // library let_log;
 
@@ -12,10 +12,6 @@ enum _Type { log, debug, warn, error }
 List<String> _printNames = ['😄', '🐛', '❗', '❌', '⬆️', '⬇️'];
 List<String> _tabNames = ['[Log]', '[Debug]', '[Warn]', '[Error]'];
 final RegExp _tabReg = RegExp(r'\[|\]');
-
-String _getTabName(int index) {
-  return _tabNames[index].replaceAll(_tabReg, '');
-}
 
 class _Config {
   /// Whether to display the log in reverse order

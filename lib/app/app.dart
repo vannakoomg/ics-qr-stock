@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
 import 'package:sos_mobile/app/global_tapped_builder.dart';
 import 'package:sos_mobile/config/router/app_router.dart';
+import 'package:sos_mobile/core/constants/constants.dart';
+import 'package:sos_mobile/core/helper/local_data/storge_local.dart';
 import 'package:sos_mobile/core/utils/log/app_logger.dart';
 import 'package:sos_mobile/di/di.dart';
 import 'package:sos_mobile/features/login/presentation/bloc/login_bloc.dart';
@@ -22,8 +23,15 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      LocaleSettings.instance.setLocaleRaw("km");
+      String languages =
+          LocalStorage.getStringValue(SharedPreferenceKeys.languages);
+      if (languages != "en") {
+        LocaleSettings.instance.setLocale(AppLocale.km);
+      } else {
+        LocaleSettings.instance.setLocale(AppLocale.en);
+      }
       AppLocaleUtils.supportedLocales.log();
     });
   }

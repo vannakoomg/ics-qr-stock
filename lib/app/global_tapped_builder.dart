@@ -19,7 +19,7 @@ class GlobalTappedBuilder extends StatelessWidget {
   }
 
   void _onDoubleTapped() {
-    getIt.get<ThemeController>().toggleThemeChange();
+    // getIt.get<ThemeController>().toggleThemeChange();
   }
 
   void _onTapped() {
