@@ -22,7 +22,7 @@ class _SplashPageState extends BasePageBlocState<SplashPage, SplashBloc> {
   String kkk = '';
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 2), () {
       appRoute.push(const AppRouteInfo.login());
     });
     super.initState();

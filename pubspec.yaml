@@ -18,6 +18,8 @@ dependencies:
   # local storage and cached
   cached_network_image: ^3.3.0
   shared_preferences: ^2.0.15
+  flutter_native_splash: 2.4.1
+
 
   # environment
   flutter_dotenv: ^5.0.2
@@ -99,6 +101,21 @@ dev_dependencies:
   auto_route_generator: ^8.0.0
   retrofit_generator: ^8.1.0
   json_serializable: ^6.8.0
+
+flutter_native_splash:
+  color: "#ffffff" # Default background color for light mode
+  # light:
+  #   color: "#ffffff"  # Background color for light mode
+  #   image: assets/image/logo.jpg  # Optional: Different splash image for light mode
+  # dark:
+  #   color: "#000000"  # Background color for dark mode
+  #   image: assets/image/logo.jpg  # Optional: Different splash image for dark mode
+  image: assets/image/logo.jpg  # Default splash image (used if no mode is specified)
+  android: true
+  ios: true
+  fullscreen: true
+  android_gravity: center
+  ios_content_mode: center
 
 flutter_gen:
   output: lib/gen/ # Optional (default: lib/gen/)

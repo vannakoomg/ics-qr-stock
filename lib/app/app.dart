@@ -23,17 +23,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      String languages =
-          LocalStorage.getStringValue(SharedPreferenceKeys.languages);
-      if (languages != "en") {
-        LocaleSettings.instance.setLocale(AppLocale.km);
-      } else {
-        LocaleSettings.instance.setLocale(AppLocale.en);
-      }
-      AppLocaleUtils.supportedLocales.log();
-    });
   }
 
   @override

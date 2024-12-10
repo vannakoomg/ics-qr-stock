@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sos_mobile/config/theme/theme_controller.dart';
-import 'package:sos_mobile/di/di.dart';
 
 class GlobalTappedBuilder extends StatelessWidget {
   final Widget? child;

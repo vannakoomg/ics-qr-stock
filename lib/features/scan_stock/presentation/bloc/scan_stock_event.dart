@@ -16,3 +16,8 @@ class ClickChangeMode extends ScanStockEvent with _$ClickChangeMode {
 class GetAssets extends ScanStockEvent with _$GetAssets {
   factory GetAssets(String id) = _GetAssets;
 }
+
+@freezed
+class ClickLogout extends ScanStockEvent with _$ClickLogout {
+  factory ClickLogout() = _ClickLogout;
+}

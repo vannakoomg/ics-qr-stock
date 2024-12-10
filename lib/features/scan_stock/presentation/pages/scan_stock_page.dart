@@ -38,11 +38,6 @@ class _ScanStockPageState
                     .copyWith(color: context.moonColors!.bulma),
               ),
               actions: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: kPadding2),
-                  width: 1,
-                  color: context.moonColors!.trunks,
-                ),
                 MoonButton(
                     onTap: () {
                       bloc.add(ClickChangeLanguage());
@@ -63,24 +58,80 @@ class _ScanStockPageState
                   ),
                 ),
                 kPadding.gap,
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: kPadding2),
+                  width: 1,
+                  color: context.moonColors!.trunks,
+                ),
+                kPadding.gap,
+                MoonButton.icon(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.transparent,
+                          content: GestureDetector(
+                            onTap: () {
+                              bloc.add(ClickLogout());
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(kPadding2 * 1.5),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: context.moonColors!.beerus,
+                                  ),
+                                  color: context.moonColors!.goku,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    t.scan.logoutDes,
+                                    textAlign: TextAlign.center,
+                                    style: context.moonTypography!.body.text14
+                                        .copyWith(
+                                            color: context.moonColors!.trunks),
+                                  ),
+                                  kPadding2.gap,
+                                  MoonButton(
+                                    buttonSize: MoonButtonSize.sm,
+                                    backgroundColor: AppColor.dangerColor,
+                                    label: Text(
+                                      t.common.confirm,
+                                      style: context.moonTypography!.body.text12
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                    // bloc.add(ClickLogout());
+                  },
+                  icon: Icon(
+                    MoonIcons.generic_log_out_24_light,
+                    color: context.moonColors!.bulma,
+                  ),
+                ),
               ],
             ),
-            body: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(child: Container()),
-                  GestureDetector(
+            body: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(child: Container()),
+                Padding(
+                  padding: const EdgeInsets.all(kPadding2),
+                  child: MoonButton(
                     onTap: () async {
                       await Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => AiBarcodeScanner(
-                            actions: const [],
-
-                            // sheetTitle: "Scan any QR",
                             onDispose: () {
-                              /// This is called when the barcode scanner is disposed.
-                              /// You can write your own logic here.
                               debugPrint("Barcode scanner disposed!");
                             },
                             hideGalleryButton: false,
@@ -123,20 +174,15 @@ class _ScanStockPageState
                         ),
                       );
                     },
-                    child: Container(
-                        width: double.infinity,
-                        color: context.moonColors!.beerus,
-                        padding: const EdgeInsets.all(kPadding),
-                        child: Center(
-                          child: Text(
-                            t.scan.buttonName,
-                            style: context.moonTypography!.heading.text16
-                                .copyWith(color: AppColor.primaryColor),
-                          ),
-                        )),
+                    isFullWidth: true,
+                    label: const Icon(
+                      MoonIcons.security_qr_code_alternative_24_regular,
+                      color: AppColor.primaryColor,
+                    ),
+                    backgroundColor: AppColor.primaryColor.withOpacity(0.3),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },

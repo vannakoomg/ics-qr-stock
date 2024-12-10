@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import '../../../../app/base/bloc/bloc.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../core/constants/constants.dart';
@@ -19,6 +20,7 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
   ScanStockBloc() : super(const _Initial()) {
     on<ClickChangeMode>(_onChangeMode);
     on<ClickChangeLanguage>(_onChnageLanduage);
+    on<ClickLogout>(_onClickLogout);
   }
   FutureOr<void> _onChangeMode(
       ClickChangeMode event, Emitter<ScanStockState> emit) {
@@ -35,5 +37,11 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       LocaleSettings.instance.setLocale(AppLocale.en);
       LocalStorage.storeData(key: SharedPreferenceKeys.languages, value: "en");
     }
+  }
+
+  FutureOr<void> _onClickLogout(
+      ClickLogout event, Emitter<ScanStockState> emit) {
+    LocalStorage.storeData(key: SharedPreferenceKeys.accessToken, value: "");
+    appRoute.replaceAll([const AppRouteInfo.login()]);
   }
 }
