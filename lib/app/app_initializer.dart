@@ -1,5 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,28 +45,11 @@ Future<void> _initSystemUIPreferences() async {
   // });
 }
 
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  WidgetsFlutterBinding.ensureInitialized();
 
-  if (message.notification != null) {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-    await LocalStorage.init();
-    debugPrint("Handling a background mdfdsfsdfdsfdsessage: ${message.data}");
-    FirebaseMessaging.onMessageOpenedApp.listen(
-      (event) {
-        debugPrint("--------------");
-      },
-    );
-  }
-}
 
 Future<void> _appConfig() async {
   await LocalStorage.init();
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  configureDependencies();
+ 
 }
 
 class AppBlocObserver extends BlocObserver with LogMixin {

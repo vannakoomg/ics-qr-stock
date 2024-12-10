@@ -22,10 +22,7 @@ dependencies:
   # environment
   flutter_dotenv: ^5.0.2
 
-  # firebase library
-  firebase_auth: ^4.9.0
-  firebase_core: ^2.27.0
-  firebase_messaging: ^14.4.0
+
 
   # http client
   dio: ^5.4.0
@@ -37,18 +34,15 @@ dependencies:
   # utilities
   share_plus: ^10.0.0
   flutter_local_notifications: ^17.0.0
-  connectivity_plus: ^6.0.1
-  gallery_saver: ^2.3.2
   flutter_image_compress: ^2.1.0
-  flutter_app_badger: ^1.5.0
   image_picker: 1.1.2
   path_provider: ^2.0.11
-  url_launcher: ^6.3.0
+  # mobile_scanner: ^6.0.2
+
   ai_barcode_scanner: ^6.0.1
 
 
-  # google service
-  google_sign_in: ^6.1.5
+
 
   # service locator
   get_it: ^7.7.0
@@ -90,7 +84,6 @@ dependencies:
   flutter_screenutil: ^5.9.3
   pull_to_refresh: ^2.0.0
   async: ^2.11.0
-  win32: 5.4.0  # Replace with an older compatible version
 
 
 dev_dependencies:

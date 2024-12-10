@@ -6,7 +6,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -122,12 +121,7 @@ Future<File> pickImage({ImageSource source = ImageSource.gallery}) async {
   }
 }
 
-Future saveImage(String urlImage) async {
-  if (urlImage != '') {
-    var kkk = await GallerySaver.saveImage(urlImage);
-    debugPrint("kkk $kkk");
-  }
-}
+
 
 extension RangeCheck on int {
   bool isBetween(int min, int max) => this > min && this < max;
