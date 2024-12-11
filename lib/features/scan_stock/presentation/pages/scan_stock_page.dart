@@ -120,69 +120,71 @@ class _ScanStockPageState
                 ),
               ],
             ),
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(child: Container()),
-                Padding(
-                  padding: const EdgeInsets.all(kPadding2),
-                  child: MoonButton(
-                    onTap: () async {
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => AiBarcodeScanner(
-                            onDispose: () {
-                              debugPrint("Barcode scanner disposed!");
-                            },
-                            hideGalleryButton: false,
-                            controller: MobileScannerController(
-                              detectionSpeed: DetectionSpeed.normal,
+            body: SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: const EdgeInsets.all(kPadding2),
+                    child: MoonButton(
+                      onTap: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AiBarcodeScanner(
+                              onDispose: () {
+                                debugPrint("Barcode scanner disposed!");
+                              },
+                              hideGalleryButton: false,
+                              controller: MobileScannerController(
+                                detectionSpeed: DetectionSpeed.normal,
+                              ),
+                              onDetect: (BarcodeCapture capture) {
+                                /// The row string scanned barcode value
+                                // final String? scannedValue =
+                                //     capture.barcodes.first.rawValue;
+                                // debugPrint("Barcode scanned: $scannedValue");
+              
+                                // /// The `Uint8List` image is only available if `returnImage` is set to `true`.
+                                // final Uint8List? image = capture.image;
+                                // debugPrint("Barcode image: $image");
+              
+                                /// row data of the barcode
+                                // final Object? raw = capture.raw;
+                                // debugPrint("Barcode raw: $raw");
+              
+                                // /// List of scanned barcodes if any
+                                // final List<Barcode> barcodes = capture.barcodes;
+                                // debugPrint("Barcode list: $barcodes");
+                              },
+                              validator: (value) {
+                                if (value.barcodes.isEmpty) {
+                                  return false;
+                                }
+                                if (!(value.barcodes.first.rawValue
+                                        ?.contains('flutter.dev') ??
+                                    false)) {
+                                  debugPrint("---------false");
+                                  return false;
+                                }
+                                debugPrint("---------true");
+              
+                                return true;
+                              },
                             ),
-                            onDetect: (BarcodeCapture capture) {
-                              /// The row string scanned barcode value
-                              // final String? scannedValue =
-                              //     capture.barcodes.first.rawValue;
-                              // debugPrint("Barcode scanned: $scannedValue");
-
-                              // /// The `Uint8List` image is only available if `returnImage` is set to `true`.
-                              // final Uint8List? image = capture.image;
-                              // debugPrint("Barcode image: $image");
-
-                              /// row data of the barcode
-                              // final Object? raw = capture.raw;
-                              // debugPrint("Barcode raw: $raw");
-
-                              // /// List of scanned barcodes if any
-                              // final List<Barcode> barcodes = capture.barcodes;
-                              // debugPrint("Barcode list: $barcodes");
-                            },
-                            validator: (value) {
-                              if (value.barcodes.isEmpty) {
-                                return false;
-                              }
-                              if (!(value.barcodes.first.rawValue
-                                      ?.contains('flutter.dev') ??
-                                  false)) {
-                                debugPrint("---------false");
-                                return false;
-                              }
-                              debugPrint("---------true");
-
-                              return true;
-                            },
                           ),
-                        ),
-                      );
-                    },
-                    isFullWidth: true,
-                    label: const Icon(
-                      MoonIcons.security_qr_code_alternative_24_regular,
-                      color: AppColor.primaryColor,
+                        );
+                      },
+                      isFullWidth: true,
+                      label: const Icon(
+                        MoonIcons.security_qr_code_alternative_24_regular,
+                        color: AppColor.primaryColor,
+                      ),
+                      backgroundColor: AppColor.primaryColor.withOpacity(0.3),
                     ),
-                    backgroundColor: AppColor.primaryColor.withOpacity(0.3),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
