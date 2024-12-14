@@ -120,10 +120,10 @@ class AppPopupInfoMapper extends BasePopupInfoMapper {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('App take a little break!',
+                Text(t.common.errorTitle1,
                     style: MoonTypography.typography.heading.text14),
                 const Gap(kPadding),
-                Text('We will be back very soon. Sorry for incovienence',
+                Text(t.common.errorDes1,
                     style: MoonTypography.typography.body.text12),
                 const Gap(kPadding2),
                 MoonFilledButton(

@@ -6,9 +6,9 @@ class BaseUrls {
   static const _DEV_BASE_URL = 'http://3.1.218.249/api/';
 
   static const _UAT_BASE_URL = 'http://...UAT.../';
-  static const _PROD_BASE_URL = 'http://...PROD.../';
+  static const _PROD_BASE_URL = 'http://172.62.72.7:8069/api/';
 
-  static const String baseUrl = _DEV_BASE_URL;
+  static const String baseUrl = _PROD_BASE_URL;
 }
 
 // #### PATH ###

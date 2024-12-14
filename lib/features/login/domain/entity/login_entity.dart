@@ -5,6 +5,6 @@ class LoginResponseEntity {
     required this.token,
   });
 
-  @JsonKey(name: 'access_token')
+  @JsonKey(name: 'token')
   final String token;
 }

@@ -12,22 +12,29 @@ abstract class LoginApiService {
   @FactoryMethod()
   factory LoginApiService(Dio dio) = _LoginApiService;
 
-  @POST('login')
+  @POST('authenticate')
   Future<LoginModel> login({@Body() required LoginInput loginInput});
 
   @POST('register')
   Future<LoginModel> signup({@Body() required LoginInput loginInput});
 }
 
-@JsonSerializable(createToJson: true)
+@JsonSerializable(createToJson: false)
 class LoginInput {
   LoginInput({
-    required this.email,
+    required this.username,
     required this.password,
   });
 
-  final String email;
+  final String username;
   final String password;
 
-  Map<String, dynamic> toJson() => _$LoginInputToJson(this);
+  Map<String, dynamic> toJson() {
+    return {
+      'params': {
+        'username': username,
+        'password': password,
+      },
+    };
+  }
 }

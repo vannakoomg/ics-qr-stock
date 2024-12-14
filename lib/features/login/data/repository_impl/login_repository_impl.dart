@@ -12,12 +12,12 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<LoginModel> login({
-    required String email,
+    required String username,
     required String password,
   }) async {
     return await _loginApiService.login(
       loginInput: LoginInput(
-        email: email,
+        username: username,
         password: password,
       ),
     );

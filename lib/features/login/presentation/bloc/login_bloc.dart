@@ -12,6 +12,11 @@ import 'package:sos_mobile/app/base/bloc/base_state.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/features/login/domain/usecase/login_usecase.dart';
 
+import '../../../../core/constants/constants.dart';
+import '../../../../core/helper/fuction.dart';
+import '../../../../core/helper/local_data/storge_local.dart';
+import '../../data/data_sources/remote/login_api_service.dart';
+
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
@@ -49,15 +54,15 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       ClickButtonLogin event, Emitter<LoginState> emit) async {
     await runAppCatching(
       () async {
-        // emit(state.copyWith(loading: true));
-        // unFocus();
-        // final input =
-        //     LoginInput(email: state.userName, password: state.password);
-        // final loginEnity = await _loginUseCase.excecute(input);
-        // await LocalStorage.storeData(
-        //   key: SharedPreferenceKeys.accessToken,
-        //   value: loginEnity.token,
-        // );
+        emit(state.copyWith(loading: true));
+        unFocus();
+        final input =
+            LoginInput(username: state.userName, password: state.password);
+        final loginEnity = await _loginUseCase.excecute(input);
+        await LocalStorage.storeData(
+          key: SharedPreferenceKeys.accessToken,
+          value: loginEnity.token,
+        );
         appRoute.push(const AppRouteInfo.scanStock());
       },
       onError: (e) async {
@@ -70,7 +75,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   // this for check condition to enable button login base on lartest state value
   void _enableLogin(Emitter<LoginState> emit) {
     debugPrint("${state.userName.isNotEmpty && state.password.length >= 8}");
-    if (state.userName.isNotEmpty && state.password.length >= 8) {
+    if (state.userName.isNotEmpty && state.password.isNotEmpty) {
       emit(state.copyWith(enableLogin: true));
     } else {
       emit(state.copyWith(enableLogin: false));

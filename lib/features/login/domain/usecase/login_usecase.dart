@@ -4,6 +4,8 @@ import 'package:sos_mobile/app/base/usecase/base_use_case.dart';
 import 'package:sos_mobile/features/login/domain/entity/login_entity.dart';
 import 'package:sos_mobile/features/login/domain/repository/login_repository.dart';
 
+import '../../data/data_sources/remote/login_api_service.dart';
+
 @Injectable()
 class LoginUseCase implements BaseUseCase<LoginInput, LoginResponseEntity> {
   LoginUseCase(this._loginRepository);
@@ -13,7 +15,7 @@ class LoginUseCase implements BaseUseCase<LoginInput, LoginResponseEntity> {
   @override
   Future<LoginResponseEntity> excecute(LoginInput input) async {
     final output = await _loginRepository.login(
-      email: input.email,
+      username: input.username,
       password: input.password,
     );
 
@@ -21,14 +23,7 @@ class LoginUseCase implements BaseUseCase<LoginInput, LoginResponseEntity> {
   }
 }
 
-class LoginInput {
-  final String email;
-  final String password;
-  LoginInput({
-    required this.email,
-    required this.password,
-  });
-}
+
 
 // class AuthUseCase with LoginUseCase, LogoutUseCase {
 //   AuthUseCase(super.loginRepository);

@@ -8,7 +8,9 @@
     },
     "common": {
         "ok": "OK",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "errorTitle1": "App take a little break!",
+        "errorDes1": "We will be back very soon. Sorry for incovienence"
     },
     "login": {
         "title": "Login",

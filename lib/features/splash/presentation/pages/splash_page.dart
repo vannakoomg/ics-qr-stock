@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
+import 'package:sos_mobile/config/router/app_router.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/core/constants/constants.dart';
+import 'package:sos_mobile/core/helper/local_data/storge_local.dart';
 import 'package:sos_mobile/gen/i18n/translations.g.dart';
 
 import '../bloc/bloc.dart';
@@ -22,8 +24,14 @@ class _SplashPageState extends BasePageBlocState<SplashPage, SplashBloc> {
   String kkk = '';
   @override
   void initState() {
+    String token =
+        LocalStorage.getStringValue(SharedPreferenceKeys.accessToken);
     Future.delayed(const Duration(seconds: 2), () {
-      appRoute.push(const AppRouteInfo.login());
+      if (token.isEmpty) {
+        appRoute.push(const AppRouteInfo.login());
+      } else {
+        appRoute.push(const AppRouteInfo.scanStock());
+      }
     });
     super.initState();
   }
