@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sos_mobile/app/base/bloc/base_bloc.dart';
@@ -11,6 +12,9 @@ import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/config/router/popup_route/app_popup_info.dart';
 import 'package:sos_mobile/config/exceptions/app_exception.dart';
 import 'package:sos_mobile/core/utils/log/app_logger.dart';
+
+import '../../core/constants/constants.dart';
+import '../../core/helper/local_data/storge_local.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -23,19 +27,20 @@ class AppBloc extends BaseBloc<AppEvent, AppState> {
     on<AppEvent>((event, emit) async {
       await event.map(
           started: (value) {},
-          onCachedError: (onCachedError) async =>
-              await _onCachedError(onCachedError, emit));
+          onCachedError: (onCachedError) async {
+            debugPrint("---------------->$onCachedError");
+            await _onCachedError(onCachedError, emit);
+          });
     });
   }
 
   FutureOr<void> _onCachedError(
       _OnCachedError onCachedError, Emitter<AppState> emit) async {
-    // emit(state.copyWith(error: null));
-
+    emit(state.copyWith(error: null));
     final error = onCachedError.error;
 
     emit(state.copyWith(error: error));
-
+    debugPrint("khmer s khdsfjksd");
     if (error is DioException) {
       logE(stackTrace: error.stackTrace);
       if (error.response?.data['message'] == 'Unauthenticated.') {
@@ -43,7 +48,7 @@ class AppBloc extends BaseBloc<AppEvent, AppState> {
           AppPopupInfo.unAuthenticated(
             message: error.response?.data['message'],
             onPressedButton: () {
-              // LocalStorage.remove(SharedPreferenceKeys.accessToken);
+              LocalStorage.remove(SharedPreferenceKeys.accessToken);
               appRoute.replaceAll([const AppRouteInfo.login()]);
             },
           ),

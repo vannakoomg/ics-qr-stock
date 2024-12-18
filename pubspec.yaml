@@ -18,7 +18,7 @@ dependencies:
   # local storage and cached
   cached_network_image: ^3.3.0
   shared_preferences: ^2.0.15
-  flutter_native_splash: 2.4.1
+  flutter_native_splash: ^2.4.1
 
 
   # environment

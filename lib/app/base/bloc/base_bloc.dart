@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:sos_mobile/app/app_bloc/app_bloc.dart';
 import 'package:sos_mobile/app/base/bloc/base_event.dart';
+import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 
 import '../../../config/router/popup_route/app_popup_info.dart';
 import '../navigation/app_navigator.dart';
@@ -53,7 +54,7 @@ abstract class BaseBlocDeligate<E extends BaseEvent, S extends BaseState>
       AppPopupInfo.unAuthenticated(
         message: error.toString(),
         onPressedButton: () {
-          // appRoute.replaceAll([const AppRouteInfo.login()]);
+          appRoute.replaceAll([const AppRouteInfo.login()]);
         },
       ),
     );
