@@ -36,15 +36,16 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       GetAssets event, Emitter<ScanStockState> emit) async {
     await runAppCatching(
       () async {
-        emit(state.copyWith(isLoading: true, asset: null, isAssetNull: false));
+        emit(state.copyWith(isLoading: true, asset: null, isAssetNull: false,assetId: event.id));
         List<AssetEntity> ass = await _getAssetDetailUsecase
-            .excecute(AssetInput(assetNumber: "2-CIS-201-001-002"));
+            .excecute(AssetInput(assetNumber: event.id));
         if (ass.isEmpty) {
           emit(state.copyWith(isLoading: false, isAssetNull: true));
         } else {
           emit(state.copyWith(
               isLoading: false, asset: ass[0], isAssetNull: false));
         }
+        appRoute.pop();
       },
       onError: (error) async {
         emit(state.copyWith(isLoading: false));
@@ -63,7 +64,7 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       () async {
         await _remarkAssetUsecase.excecute(RemarkInput(
             remark: event.remark == "" ? " " : event.remark,
-            assetId: "2-CIS-201-001-002",
+            assetId: state.assetId,
             updateAt:
                 DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
         emit(state.copyWith(

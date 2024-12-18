@@ -6,5 +6,6 @@ class ScanStockState extends BaseState with _$ScanStockState {
     AssetEntity? asset,
     @Default(false) bool isLoading,
     @Default(false) bool isAssetNull,
+    @Default('') String assetId,
   }) = _Initial;
 }

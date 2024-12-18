@@ -25,6 +25,7 @@
         "logoutDes": "Do you want to logging out ? Time we’ll have to say goodbye",
         "remark": "Remake",
         "remarkDes": "Remark ......",
-        "assetNull": "Oops! This asset isn't in our system. Give it another try!"
+        "assetNull": "Oops! This asset isn't in our system. Give it another try!",
+        "noImage":"This asset no image"
     }
 }

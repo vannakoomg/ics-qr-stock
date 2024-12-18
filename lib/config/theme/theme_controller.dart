@@ -31,9 +31,7 @@ class ThemeController extends Cubit<ThemeMode> {
       changeTheme(ThemeMode.dark);
     } else {
       LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "light");
-      final brightness = WidgetsBinding.instance.window.platformBrightness;
-      changeTheme(
-          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light);
+      changeTheme(ThemeMode.light);
     }
     // if (theme == "system") {
     //   LocalStorage.storeData(key: SharedPreferenceKeys.theme, value: "light");
