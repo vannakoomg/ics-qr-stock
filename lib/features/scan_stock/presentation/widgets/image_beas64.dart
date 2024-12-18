@@ -13,7 +13,8 @@ class Base64Image extends StatelessWidget {
     try {
       // Decode Base64 to Uint8List
       Uint8List imageBytes = base64Decode(base64String);
-      return Image.memory(
+      return Image.memory(width: double.infinity,
+      // height: MediaQuery.sizeOf(context).height/2.5,
         imageBytes,
         fit: BoxFit.cover, // Adjust the fit based on your design
         errorBuilder: (context, error, stackTrace) {

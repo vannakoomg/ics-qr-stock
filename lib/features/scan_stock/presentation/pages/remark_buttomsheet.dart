@@ -41,7 +41,7 @@ class _RemarkButtomSheetState
   @override
   Widget buildPage(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(t.scan.remark),
         centerTitle: true,
@@ -55,6 +55,7 @@ class _RemarkButtomSheetState
       body: BlocBuilder<RemarkBloc, RemarkState>(
         builder: (context, state) {
           return Container(
+
             padding: const EdgeInsets.all(kPadding2),
             child: Column(
               children: [

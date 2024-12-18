@@ -155,8 +155,9 @@ class _ScanStockPageState
                                                         state.asset!.image!)
                                                 : Container(
                                                     width: double.infinity,
-                                                    color: context
-                                                        .moonColors!.beerus,
+                                                    decoration: BoxDecoration(color: context
+                                                        .moonColors!.beerus,borderRadius: BorderRadius.circular(5)),
+                                                    
                                                     padding:
                                                         const EdgeInsets.all(
                                                             kPadding2 * 2),
@@ -170,14 +171,14 @@ class _ScanStockPageState
                                                   child: Container(
                                                     padding:
                                                         const EdgeInsets.all(
-                                                            kPadding / 2),
+                                                            kPadding ),
                                                     color: Colors.red,
                                                     child: Text(
                                                       t.scan.remark,
                                                       style: context
                                                           .moonTypography!
                                                           .body
-                                                          .text16
+                                                          .text14
                                                           .copyWith(
                                                               color:
                                                                   Colors.white),
@@ -185,15 +186,25 @@ class _ScanStockPageState
                                                   )),
                                           ],
                                         ),
-                                        kPadding2.gap,
-                                        Text(
-                                          "${state.asset!.name}",
-                                          style: context
-                                              .moonTypography!.body.text18
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w500),
-                                        ),
                                         kPadding.gap,
+                                        Container(
+                                          width: double.infinity,
+                                          padding: EdgeInsets.all(kPadding),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(
+                                              color: context.moonColors!.beerus,
+                                            )),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "${state.asset!.name}",
+                                                style: context
+                                                    .moonTypography!.body.text18
+                                                    .copyWith(
+                                                        fontWeight: FontWeight.w500),
+                                              ),
+                                              kPadding.gap,
                                         Text(
                                           "${state.asset!.description_in_khmer}",
                                           style: context
@@ -201,25 +212,34 @@ class _ScanStockPageState
                                               .copyWith(
                                                   fontWeight: FontWeight.w400),
                                         ),
-                                        if (state.asset!.remark!.isNotEmpty)
+                                            ],
+                                          ),
+                                        ),
+                                        
+                                        if (state.asset!.remark!.isNotEmpty &&state.asset!.remark!=' ' )
                                           Container(
-                                            margin: const EdgeInsets.only(
-                                                top: kPadding2),
-                                            padding:
-                                                const EdgeInsets.all(kPadding2),
+                                         
+                                           margin: EdgeInsets.only(top: kPadding),
                                             width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                              color: context.moonColors!.beerus,
-                                            )),
+                                          
                                             child: Center(
-                                              child: Text(
-                                                "${state.asset!.remark}",
-                                                style: context
-                                                    .moonTypography!.body.text18
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w400),
+                                              child: Row(
+                                                children: [
+                                                  Text("${t.scan.remark} : ",  style: context
+                                                        .moonTypography!.body.text14
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                                color: context.moonColors!.trunks),),
+                                                  Text(
+                                                    "${state.asset!.remark}",
+                                                    style: context
+                                                        .moonTypography!.body.text14
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,   color: context.moonColors!.trunks),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
@@ -238,7 +258,7 @@ class _ScanStockPageState
                           onTap: () async {
                             RemarkHH remark =
                                 await RemarkButtomSheet.showBottomSheet(
-                                    context, state.asset!.remark ?? "");
+                                    context, state.asset!.remark==" "?"": state.asset!.remark!);
                             if (remark.isRemark) {
                               bloc.add(RemarkAsset(remark.remark));
                             }
@@ -308,7 +328,7 @@ class _ScanStockPageState
                           MoonIcons.security_qr_code_alternative_24_regular,
                           color: AppColor.primaryColor,
                         ),
-                        backgroundColor: AppColor.primaryColor.withOpacity(0.3),
+                        backgroundColor: AppColor.primaryColor.withOpacity(0.5),
                       ),
                     ],
                   ),

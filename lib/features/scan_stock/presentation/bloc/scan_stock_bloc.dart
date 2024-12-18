@@ -37,6 +37,7 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
     await runAppCatching(
       () async {
         emit(state.copyWith(isLoading: true, asset: null, isAssetNull: false,assetId: event.id));
+        appRoute.pop();
         List<AssetEntity> ass = await _getAssetDetailUsecase
             .excecute(AssetInput(assetNumber: event.id));
         if (ass.isEmpty) {
@@ -45,7 +46,6 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
           emit(state.copyWith(
               isLoading: false, asset: ass[0], isAssetNull: false));
         }
-        appRoute.pop();
       },
       onError: (error) async {
         emit(state.copyWith(isLoading: false));
