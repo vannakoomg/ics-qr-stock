@@ -56,30 +56,27 @@ class _RemarkButtomSheetState
         builder: (context, state) {
           return Container(
             padding: const EdgeInsets.all(kPadding2),
-            color: Colors.white,
             child: Column(
               children: [
                 Expanded(
                     child: SingleChildScrollView(
-                  child: Container(
-                    child: TextFormField(
-                      autofocus: true,
-                      controller: state.remarkController,
-                      maxLines: 20,
-                      minLines: 1,
-                      style: context.moonTypography!.body.text16
-                          .copyWith(fontWeight: FontWeight.w400),
-                      decoration: InputDecoration(
-                        isDense: true,
-                        hintStyle: context.moonTypography!.body.text16,
-                        contentPadding: EdgeInsets.zero,
-                        border: InputBorder.none,
-                        hintText: t.scan.remarkDes,
-                      ),
-                      onChanged: (value) {
-                        bloc.add(RemarkChanged(value));
-                      },
+                  child: TextFormField(
+                    autofocus: true,
+                    controller: state.remarkController,
+                    maxLines: 20,
+                    minLines: 1,
+                    style: context.moonTypography!.body.text16
+                        .copyWith(fontWeight: FontWeight.w400),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      hintStyle: context.moonTypography!.body.text16,
+                      contentPadding: EdgeInsets.zero,
+                      border: InputBorder.none,
+                      hintText: t.scan.remarkDes,
                     ),
+                    onChanged: (value) {
+                      bloc.add(RemarkChanged(value));
+                    },
                   ),
                 )),
                 MoonButton(

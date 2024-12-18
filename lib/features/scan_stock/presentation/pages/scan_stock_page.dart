@@ -143,20 +143,27 @@ class _ScanStockPageState
                               )
                             : state.asset != null
                                 ? Container(
-                                  width: double.infinity,
+                                    width: double.infinity,
                                     padding: const EdgeInsets.all(kPadding),
                                     child: Column(
                                       children: [
                                         Stack(
                                           children: [
-                                            state.asset!.image!.isNotEmpty?
-                                            Base64Image(
-                                                base64String:
-                                                    state.asset!.image!):Container(
-                                                      width: double.infinity,
-                                                      color: context.moonColors!.beerus,
-                                                      padding: EdgeInsets.all(kPadding2*2),
-                                                      child: Center(child: Text("${t.scan.noImage}",))),
+                                            state.asset!.image!.isNotEmpty
+                                                ? Base64Image(
+                                                    base64String:
+                                                        state.asset!.image!)
+                                                : Container(
+                                                    width: double.infinity,
+                                                    color: context
+                                                        .moonColors!.beerus,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            kPadding2 * 2),
+                                                    child: Center(
+                                                        child: Text(
+                                                      t.scan.noImage,
+                                                    ))),
                                             if (state.asset!.isRemark!)
                                               Positioned(
                                                   right: 0,
@@ -249,6 +256,7 @@ class _ScanStockPageState
                           await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => AiBarcodeScanner(
+                                sheetTitle: t.scan.scantitle,
                                 onDispose: () {
                                   debugPrint("Barcode scanner disposed!");
                                 },
@@ -283,7 +291,8 @@ class _ScanStockPageState
                                       false)) {
                                     debugPrint(
                                         "---------false ${value.barcodes.first.rawValue}");
-                                    bloc.add(GetAssets('${value.barcodes.first.rawValue}'));
+                                    bloc.add(GetAssets(
+                                        '${value.barcodes.first.rawValue}'));
                                     return false;
                                   }
                                   debugPrint("---------true");
