@@ -21,3 +21,8 @@ class GetAssets extends ScanStockEvent with _$GetAssets {
 class ClickLogout extends ScanStockEvent with _$ClickLogout {
   factory ClickLogout() = _ClickLogout;
 }
+
+@freezed
+class RemarkAsset extends ScanStockEvent with _$RemarkAsset {
+  factory RemarkAsset(String remark) = _RemarkAsset;
+}

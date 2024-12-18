@@ -5,19 +5,22 @@ part 'asset_model.g.dart';
 
 @JsonSerializable(createToJson: false)
 class AssetModel {
-  AssetModel({
-    required this.name,
-    required this.description_in_khmer,
-    required this.asset_number,
-    required this.image,
-    required this.id,
-  });
+  AssetModel(
+      {required this.name,
+      required this.description_in_khmer,
+      required this.asset_number,
+      required this.image,
+      required this.id,
+      required this.isRemark,
+      required this.remark});
 
   final int? id;
   final String? name;
   final String? description_in_khmer;
   final String? asset_number;
   final String? image;
+  final String? remark;
+  final bool? isRemark;
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
       _$AssetModelFromJson(json);
@@ -30,7 +33,9 @@ extension AssetModelToEntity on AssetModel {
       asset_number: asset_number,
       image: image,
       description_in_khmer: description_in_khmer,
-      name: name);
+      name: name,
+      isRemark: isRemark ?? false,
+      remark: remark ?? "");
 }
 
 extension AssetModelToListEntity on List<AssetModel> {

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sos_mobile/app/base/response/base_data_response.dart';
 import 'package:sos_mobile/features/login/data/model/login_model.dart';
 
 part 'login_api_service.g.dart';
@@ -13,10 +14,8 @@ abstract class LoginApiService {
   factory LoginApiService(Dio dio) = _LoginApiService;
 
   @POST('authenticate')
-  Future<LoginModel> login({@Body() required LoginInput loginInput});
-
-  @POST('register')
-  Future<LoginModel> signup({@Body() required LoginInput loginInput});
+  Future<DataResponse<List<LoginModel>>> login(
+      {@Body() required LoginInput loginInput});
 }
 
 @JsonSerializable(createToJson: false)

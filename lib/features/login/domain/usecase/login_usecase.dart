@@ -7,13 +7,14 @@ import 'package:sos_mobile/features/login/domain/repository/login_repository.dar
 import '../../data/data_sources/remote/login_api_service.dart';
 
 @Injectable()
-class LoginUseCase implements BaseUseCase<LoginInput, LoginResponseEntity> {
+class LoginUseCase
+    implements BaseUseCase<LoginInput, List<LoginResponseEntity>> {
   LoginUseCase(this._loginRepository);
 
   final LoginRepository _loginRepository;
 
   @override
-  Future<LoginResponseEntity> excecute(LoginInput input) async {
+  Future<List<LoginResponseEntity>> excecute(LoginInput input) async {
     final output = await _loginRepository.login(
       username: input.username,
       password: input.password,

@@ -15,4 +15,9 @@ class ScanStockRepositoryImpl implements ScanStockRepository {
     final data = await _apiService.getAssetDetail(assetInput: input);
     return data.data.toListEntity();
   }
+
+  @override
+  Future<void> remarkAsset(RemarkInput remark) async {
+    return await _apiService.remarkAsset(remarkInput: remark);
+  }
 }

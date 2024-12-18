@@ -86,6 +86,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   pull_to_refresh: ^2.0.0
   async: ^2.11.0
+  intl: ^0.19.0
+
 
 
 dev_dependencies:

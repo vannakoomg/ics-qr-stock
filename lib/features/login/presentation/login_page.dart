@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:moon_design/moon_design.dart';
 import 'package:sos_mobile/app/base/page/base_page_bloc_state.dart';
-import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/core/constants/constants.dart';
 import 'package:sos_mobile/features/login/presentation/bloc/login_bloc.dart';
 import 'package:sos_mobile/gen/i18n/translations.g.dart';
@@ -95,7 +94,9 @@ class _LoginPageState extends BasePageBlocState<LoginPage, LoginBloc> {
                     ),
                     MoonButton(
                       onTap: () {
-                        bloc.add(ClickButtonLogin());
+                        if (state.enableLogin) {
+                          bloc.add(ClickButtonLogin());
+                        }
                       },
                       isFullWidth: true,
                       label: state.loading

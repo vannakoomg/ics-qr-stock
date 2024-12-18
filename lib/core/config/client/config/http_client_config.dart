@@ -14,7 +14,7 @@ class AppConfig extends IConfig {
 
   @override
   Map<String, String> get headers => {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain',
         'accept': 'application/json',
       };
 }

@@ -16,6 +16,8 @@ abstract class ScanStockApiService {
   @POST('asset_detail')
   Future<DataResponse<List<AssetModel>>> getAssetDetail(
       {@Body() required AssetInput assetInput});
+  @POST('asset_update')
+  Future<void> remarkAsset({@Body() required RemarkInput remarkInput});
 }
 
 @JsonSerializable(createToJson: false)
@@ -30,6 +32,30 @@ class AssetInput {
     return {
       'params': {
         'asset_number': assetNumber,
+      },
+    };
+  }
+}
+
+@JsonSerializable(createToJson: false)
+class RemarkInput {
+  RemarkInput({
+    required this.remark,
+    required this.assetId,
+    required this.updateAt,
+  });
+
+  final String remark;
+  final String assetId;
+  final String updateAt;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'params': {
+        "asset_number": assetId,
+        "status": true,
+        "remark": remark,
+        "updated_on": updateAt
       },
     };
   }

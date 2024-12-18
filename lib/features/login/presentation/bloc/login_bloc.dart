@@ -10,6 +10,7 @@ import 'package:sos_mobile/app/base/bloc/base_bloc.dart';
 import 'package:sos_mobile/app/base/bloc/base_event.dart';
 import 'package:sos_mobile/app/base/bloc/base_state.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
+import 'package:sos_mobile/features/login/domain/entity/login_entity.dart';
 import 'package:sos_mobile/features/login/domain/usecase/login_usecase.dart';
 
 import '../../../../core/constants/constants.dart';
@@ -58,11 +59,13 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
         unFocus();
         final input =
             LoginInput(username: state.userName, password: state.password);
-        final loginEnity = await _loginUseCase.excecute(input);
+        List<LoginResponseEntity> loginEnity =
+            await _loginUseCase.excecute(input);
         await LocalStorage.storeData(
           key: SharedPreferenceKeys.accessToken,
-          value: loginEnity.token,
+          value: loginEnity[0].token,
         );
+
         appRoute.push(const AppRouteInfo.scanStock());
       },
       onError: (e) async {
