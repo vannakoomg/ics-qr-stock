@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
+import 'package:sos_mobile/core/helper/fuction.dart';
 import 'package:sos_mobile/data/data_sources/remotes/scan_stock_api_service.dart';
 import 'package:sos_mobile/features/scan_stock/domain/entities/asset_entity.dart';
 import 'package:sos_mobile/features/scan_stock/domain/usecase/get_asset_detail_usecase.dart';
@@ -30,7 +33,8 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
     on<ClickChangeLanguage>(_onChnageLanduage);
     on<ClickLogout>(_onClickLogout);
     on<GetAssets>(_getAsset);
-    on<RemarkAsset>(_remarkAsset);
+    on<ClickConfrim>(_clickConfirm);
+    on<RemarkChangedEvent>(_remarkChanged);
   }
   FutureOr<void> _getAsset(
       GetAssets event, Emitter<ScanStockState> emit) async {
@@ -44,7 +48,7 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
           emit(state.copyWith(isLoading: false, isAssetNull: true));
         } else {
           emit(state.copyWith(
-              isLoading: false, asset: ass[0], isAssetNull: false));
+              isLoading: false, asset: ass[0], isAssetNull: false, remark: ass[0].remark!.trimRight(),remarkController:  TextEditingController(text: ass[0].remark!.trimRight())));
         }
       },
       onError: (error) async {
@@ -57,19 +61,24 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       ClickChangeMode event, Emitter<ScanStockState> emit) {
     getIt.get<ThemeController>().toggleThemeChange();
   }
+  FutureOr<void> _remarkChanged( RemarkChangedEvent event,Emitter<ScanStockState> emit){
+    emit(state.copyWith(remark: event.remark));
+  }
 
-  FutureOr<void> _remarkAsset(
-      RemarkAsset event, Emitter<ScanStockState> emit) async {
+  FutureOr<void> _clickConfirm(
+      ClickConfrim event, Emitter<ScanStockState> emit) async {
     await runAppCatching(
       () async {
+        unFocus();
+        emit(state.copyWith(isLoadingRemark: true));
         await _remarkAssetUsecase.excecute(RemarkInput(
             remark: event.remark == "" ? " " : event.remark,
             assetId: state.assetId,
             updateAt:
                 DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
-        emit(state.copyWith(
+        emit(state.copyWith(isLoadingRemark:false,
             asset:
-                state.asset!.copyWith(isRemark: true, remark: event.remark)));
+                state.asset!.copyWith(count_status: true, remark: event.remark,)));
       },
     );
   }

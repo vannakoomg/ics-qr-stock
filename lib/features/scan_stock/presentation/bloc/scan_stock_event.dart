@@ -23,6 +23,11 @@ class ClickLogout extends ScanStockEvent with _$ClickLogout {
 }
 
 @freezed
-class RemarkAsset extends ScanStockEvent with _$RemarkAsset {
-  factory RemarkAsset(String remark) = _RemarkAsset;
+class ClickConfrim extends ScanStockEvent with _$ClickConfrim {
+  factory ClickConfrim(String remark) = _ClickConfrim;
 }
+@freezed
+class RemarkChangedEvent extends ScanStockEvent with _$RemarkChangedEvent{
+  factory RemarkChangedEvent(String remark) = _RemarkChangedEvent;
+}
+

@@ -11,7 +11,7 @@ class AssetModel {
       required this.asset_number,
       required this.image,
       required this.id,
-      required this.isRemark,
+      required this.count_status,
       required this.remark});
 
   final int? id;
@@ -20,7 +20,7 @@ class AssetModel {
   final String? asset_number;
   final String? image;
   final String? remark;
-  final bool? isRemark;
+  final bool? count_status;
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
       _$AssetModelFromJson(json);
@@ -34,7 +34,7 @@ extension AssetModelToEntity on AssetModel {
       image: image,
       description_in_khmer: description_in_khmer,
       name: name,
-      isRemark: isRemark ?? false,
+      count_status: count_status ?? false,
       remark: remark ?? "");
 }
 

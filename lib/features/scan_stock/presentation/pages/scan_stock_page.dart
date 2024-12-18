@@ -176,231 +176,204 @@ class _ScanStockPageState
                                 ),
                               )
                             : state.asset != null
-                                ? Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.all(kPadding),
-                                    child: Column(
-                                      children: [
-                                        Stack(
-                                          children: [
-                                            state.asset!.image!.isNotEmpty
-                                                ? Base64Image(
-                                                    base64String:
-                                                        state.asset!.image!)
-                                                : Container(
-                                                    width: double.infinity,
-                                                    decoration: BoxDecoration(
-                                                        color: context
-                                                            .moonColors!.beerus,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            kPadding2 * 2),
-                                                    child: Center(
-                                                        child: Text(
-                                                      t.scan.noImage,
-                                                    ))),
-                                            if (state.asset!.isRemark!)
-                                              Positioned(
-                                                  right: 0,
-                                                  child: Container(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            kPadding),
-                                                    color: Colors.red,
-                                                    child: Text(
-                                                      t.scan.remark,
-                                                      style: context
-                                                          .moonTypography!
-                                                          .body
-                                                          .text14
-                                                          .copyWith(
-                                                              color:
-                                                                  Colors.white),
-                                                    ),
-                                                  )),
-                                          ],
-                                        ),
-                                        kPadding.gap,
-                                        Container(
-                                          width: double.infinity,
-                                          padding:
-                                              const EdgeInsets.all(kPadding),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                color:
-                                                    context.moonColors!.beerus,
-                                              )),
-                                          child: Column(
+                                ? SingleChildScrollView(
+                                  child: Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(kPadding),
+                                      child: Column(
+                                        children: [
+                                          Stack(
                                             children: [
-                                              Text(
-                                                "${state.asset!.name}",
-                                                style: context
-                                                    .moonTypography!.body.text18
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                              ),
-                                              kPadding.gap,
-                                              Text(
-                                                "${state.asset!.description_in_khmer}",
-                                                style: context
-                                                    .moonTypography!.body.text18
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                              ),
+                                              state.asset!.image!.isNotEmpty
+                                                  ? Base64Image(
+                                                      base64String:
+                                                          state.asset!.image!)
+                                                  : Container(
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                          color: context
+                                                              .moonColors!.beerus,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5)),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              kPadding2 * 2),
+                                                      child: Center(
+                                                          child: Text(
+                                                        t.scan.noImage,
+                                                      ))),
+            
+                                              if (state.asset!.count_status!)
+                                                Positioned(
+                                                    right: 0,
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              kPadding),
+                                                      color: Colors.blue,
+                                                      child: Text(
+                                                        t.scan.verifyed,
+                                                        style: context
+                                                            .moonTypography!
+                                                            .body
+                                                            .text14
+                                                            .copyWith(
+                                                                color:
+                                                                    Colors.white),
+                                                      ),
+                                                    )),
                                             ],
                                           ),
-                                        ),
-                                        if (state.asset!.remark!.isNotEmpty &&
-                                            state.asset!.remark != ' ')
+                                          kPadding.gap,
                                           Container(
-                                            margin: const EdgeInsets.only(
-                                                top: kPadding),
                                             width: double.infinity,
-                                            child: Center(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "${t.scan.remark} : ",
-                                                    style: context
-                                                        .moonTypography!
-                                                        .body
-                                                        .text14
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: context
-                                                                .moonColors!
-                                                                .trunks),
-                                                  ),
-                                                  Text(
-                                                    "${state.asset!.remark}",
-                                                    style: context
-                                                        .moonTypography!
-                                                        .body
-                                                        .text14
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: context
-                                                                .moonColors!
-                                                                .trunks),
-                                                  ),
-                                                ],
-                                              ),
+                                            // padding:
+                                            //     const EdgeInsets.all(kPadding),
+                                            // decoration: BoxDecoration(
+                                            //     borderRadius:
+                                            //         BorderRadius.circular(5),
+                                            //     border: Border.all(
+                                            //       color:
+                                            //           context.moonColors!.beerus
+                                            //     )),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Expanded(child: Text("${t.scan.nameEn}", style: context
+                                                            .moonTypography!.body.text16.copyWith(
+                                                              color: context.moonColors!.trunks
+                                                            ),)),
+                                                    Expanded(flex: 2,
+                                                      child: Text(
+                                                        "${state.asset!.name}",
+                                                        style: context
+                                                            .moonTypography!.body.text18,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                kPadding.gap,
+                                                 Row(
+                                                  children: [
+                                                    Expanded(child: Text("${t.scan.nameKh}", style: context
+                                                            .moonTypography!.body.text16.copyWith(
+                                                              color: context.moonColors!.trunks
+                                                            ),)),
+                                                    Expanded(flex: 2,
+                                                      child: Text(
+                                                        "${state.asset!.description_in_khmer}",
+                                                        style: context
+                                                            .moonTypography!.body.text18,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                               
+                                              ],
                                             ),
                                           ),
-                                        kPadding.gap,
-                                      ],
-                                    ),
-                                  )
+                                          kPadding.gap,
+                                          // if(state.asset!.remark!.isNotEmpty&& state.asset!.remark!=" ")
+                                       GestureDetector(
+                                        onTap: ()async{
+                                     RemarkHH rr = await RemarkButtomSheet.showBottomSheet(context, state.asset!.remark!.trim());
+                                     if(rr.isRemark){
+                                      
+                                      bloc.add(ClickConfrim(rr.remark));
+                                     }
+                                        },
+                                         child: Container(width: double.infinity,
+                                         padding: EdgeInsets.all(kPadding2),
+                                         decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: context.moonColors!.trunks
+                                          ),
+                                          borderRadius: BorderRadius.circular(kPadding)
+                                          
+                                         ),
+                                         child: Text("${state.asset!.remark!.isEmpty || state.asset!.remark==' '?t.scan.remark:state.asset!.remark}"),),
+                                       )
+                               ],
+                               ),
+                              ),
+                              )
                                 : const SizedBox.shrink()),
                 Padding(
                   padding: const EdgeInsets.all(kPadding2),
-                  child: Column(
+                  child: Row(
                     children: [
-                      if (state.asset == null)
-                        Row(
-                          children: [
-                            Expanded(
+                      Expanded(
                               child: MoonButton(
+                                height: 50,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                         color: AppColor.primaryColor)),
                                 isFullWidth: true,
                                 onTap: () async {
-                                  bloc.add(RemarkAsset(" "));
+                                  bloc.add(ClickConfrim(state.remark));
                                 },
                                 label: Text(
-                                  t.common.confirm,
-                                  style: context.moonTypography!.heading.text14
+                                  t.scan.verify,
+                                  style: context.moonTypography!.heading.text16
                                       .copyWith(color: AppColor.primaryColor),
                                 ),
                               ),
-                            ),
-                            kPadding.gap,
-                            Expanded(
-                              child: MoonButton(
-                                isFullWidth: true,
-                                onTap: () async {
-                                  RemarkHH remark =
-                                      await RemarkButtomSheet.showBottomSheet(
-                                          context,
-                                          state.asset!.remark == " "
-                                              ? ""
-                                              : state.asset!.remark!);
-                                  if (remark.isRemark) {
-                                    bloc.add(RemarkAsset(remark.remark));
-                                  }
-                                },
-                                label: Text(
-                                  " ${t.common.confirm} & ${t.scan.remark}",
-                                  style: context.moonTypography!.heading.text14
-                                      .copyWith(color: Colors.white),
+                            ), kPadding.gap,
+                      Expanded(
+                        child: MoonButton(
+                          onTap: () async {
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AiBarcodeScanner(
+                                  sheetTitle: t.scan.scantitle,
+                                  onDispose: () {
+                                    debugPrint("Barcode scanner disposed!");
+                                  },
+                                  hideGalleryButton: false,
+                                  controller: MobileScannerController(
+                                    detectionSpeed: DetectionSpeed.normal,
+                                  ),
+                                  onDetect: (BarcodeCapture capture) {},
+                                  validator: (value) {
+                                    if (value.barcodes.isEmpty) {
+                                      return false;
+                                    }
+                                    if (!(value.barcodes.first.rawValue
+                                            ?.contains('flutter.dev') ??
+                                        false)) {
+                                      debugPrint(
+                                          "---------false ${value.barcodes.first.rawValue}");
+                                      bloc.add(GetAssets(
+                                          '${value.barcodes.first.rawValue}'));
+                                      return false;
+                                    }
+                                    debugPrint("---------true");
+                        
+                                    return true;
+                                  },
                                 ),
-                                backgroundColor: AppColor.primaryColor,
                               ),
-                            ),
-                          ],
+                            );
+                          },
+                          isFullWidth: true,
+                          height: 50,
+                          label: const Icon(
+                            MoonIcons.security_qr_code_alternative_24_regular,
+                            color: AppColor.primaryColor,
+                          ),
+                          backgroundColor: AppColor.primaryColor.withOpacity(0.5),
                         ),
-                      kPadding.gap,
-                      // MoonButton(
-                      //   onTap: () async {
-                      //     await Navigator.of(context).push(
-                      //       MaterialPageRoute(
-                      //         builder: (context) => AiBarcodeScanner(
-                      //           sheetTitle: t.scan.scantitle,
-                      //           onDispose: () {
-                      //             debugPrint("Barcode scanner disposed!");
-                      //           },
-                      //           hideGalleryButton: false,
-                      //           controller: MobileScannerController(
-                      //             detectionSpeed: DetectionSpeed.normal,
-                      //           ),
-                      //           onDetect: (BarcodeCapture capture) {},
-                      //           validator: (value) {
-                      //             if (value.barcodes.isEmpty) {
-                      //               return false;
-                      //             }
-                      //             if (!(value.barcodes.first.rawValue
-                      //                     ?.contains('flutter.dev') ??
-                      //                 false)) {
-                      //               debugPrint(
-                      //                   "---------false ${value.barcodes.first.rawValue}");
-                      //               bloc.add(GetAssets(
-                      //                   '${value.barcodes.first.rawValue}'));
-                      //               return false;
-                      //             }
-                      //             debugPrint("---------true");
-
-                      //             return true;
-                      //           },
-                      //         ),
-                      //       ),
-                      //     );
-                      //   },
-                      //   isFullWidth: true,
-                      //   height: 50,
-                      //   label: const Icon(
-                      //     MoonIcons.security_qr_code_alternative_24_regular,
-                      //     color: AppColor.primaryColor,
-                      //   ),
-                      //   backgroundColor: AppColor.primaryColor.withOpacity(0.5),
-                      // ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           );
-        },
+        }, 
       ),
     );
   }
