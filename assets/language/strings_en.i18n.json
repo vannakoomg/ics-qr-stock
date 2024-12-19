@@ -9,6 +9,8 @@
     "common": {
         "back": "Back",
         "ok": "OK",
+        "close": "Close",
+        "errorGenerel": "something was worng",
         "confirm": "Confirm",
         "errorTitle1": "App take a little break!",
         "errorDes1": "We will be back very soon. Sorry for incovienence"
@@ -26,13 +28,13 @@
         "logoutDes": "Do you want to logging out ? Time we’ll have to say goodbye",
         "remark": "Remake",
         "remarkDes": "Remark ......",
-        "assetNull": "Oops! This asset isn't in our system. Give it another try!",
+        "assetNull": "Oops! This itam not found.\n Give it another try!",
         "noImage": "This asset no image",
         "scantitle": "Scan any Qr Code",
-        "nameEn":"Name (En)",
-        "nameKh":"Name (Kh)",
-        "verifyed":"verifyed",
-        "verify":"verify"
-
+        "des": "Desc.",
+        "verifyed": "verifyed",
+        "verify": "verify",
+        "unVerify": "unverify",
+        "id": "Id"
     }
 }

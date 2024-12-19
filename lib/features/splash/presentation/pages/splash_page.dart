@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:moon_design/moon_design.dart';
-import 'package:sos_mobile/config/router/app_router.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/core/constants/constants.dart';
 import 'package:sos_mobile/core/helper/local_data/storge_local.dart';

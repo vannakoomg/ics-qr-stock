@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -40,15 +39,27 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       GetAssets event, Emitter<ScanStockState> emit) async {
     await runAppCatching(
       () async {
-        emit(state.copyWith(isLoading: true, asset: null, isAssetNull: false,assetId: event.id));
+        emit(state.copyWith(
+            isLoading: true,
+            asset: null,
+            isAssetNull: false,
+            assetId: event.id));
         appRoute.pop();
         List<AssetEntity> ass = await _getAssetDetailUsecase
             .excecute(AssetInput(assetNumber: event.id));
         if (ass.isEmpty) {
-          emit(state.copyWith(isLoading: false, isAssetNull: true));
+          emit(state.copyWith(
+            isLoading: false,
+            isAssetNull: true,
+          ));
         } else {
           emit(state.copyWith(
-              isLoading: false, asset: ass[0], isAssetNull: false, remark: ass[0].remark!.trimRight(),remarkController:  TextEditingController(text: ass[0].remark!.trimRight())));
+              isLoading: false,
+              asset: ass[0],
+              isAssetNull: false,
+              remark: ass[0].remark!.trimRight(),
+              remarkController:
+                  TextEditingController(text: ass[0].remark!.trimRight())));
         }
       },
       onError: (error) async {
@@ -61,7 +72,9 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       ClickChangeMode event, Emitter<ScanStockState> emit) {
     getIt.get<ThemeController>().toggleThemeChange();
   }
-  FutureOr<void> _remarkChanged( RemarkChangedEvent event,Emitter<ScanStockState> emit){
+
+  FutureOr<void> _remarkChanged(
+      RemarkChangedEvent event, Emitter<ScanStockState> emit) {
     emit(state.copyWith(remark: event.remark));
   }
 
@@ -70,15 +83,20 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
     await runAppCatching(
       () async {
         unFocus();
+        debugPrint("-------------------------------------------");
         emit(state.copyWith(isLoadingRemark: true));
         await _remarkAssetUsecase.excecute(RemarkInput(
             remark: event.remark == "" ? " " : event.remark,
             assetId: state.assetId,
+            isVerify: event.isVerify,
             updateAt:
                 DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
-        emit(state.copyWith(isLoadingRemark:false,
-            asset:
-                state.asset!.copyWith(count_status: true, remark: event.remark,)));
+        emit(state.copyWith(
+            isLoadingRemark: false,
+            asset: state.asset!.copyWith(
+              count_status: event.isVerify,
+              remark: event.remark,
+            )));
       },
     );
   }

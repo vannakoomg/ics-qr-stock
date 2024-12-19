@@ -39,21 +39,22 @@ class AssetInput {
 
 @JsonSerializable(createToJson: false)
 class RemarkInput {
-  RemarkInput({
-    required this.remark,
-    required this.assetId,
-    required this.updateAt,
-  });
+  RemarkInput(
+      {required this.remark,
+      required this.assetId,
+      required this.updateAt,
+      required this.isVerify});
 
   final String remark;
   final String assetId;
   final String updateAt;
+  final bool isVerify;
 
   Map<String, dynamic> toJson() {
     return {
       'params': {
         "asset_number": assetId,
-        "status": true,
+        "status": isVerify,
         "remark": remark,
         "updated_on": updateAt
       },

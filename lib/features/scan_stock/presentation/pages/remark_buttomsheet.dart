@@ -55,7 +55,6 @@ class _RemarkButtomSheetState
       body: BlocBuilder<RemarkBloc, RemarkState>(
         builder: (context, state) {
           return Container(
-
             padding: const EdgeInsets.all(kPadding2),
             child: Column(
               children: [
@@ -64,8 +63,8 @@ class _RemarkButtomSheetState
                   child: TextFormField(
                     autofocus: true,
                     controller: state.remarkController,
-                    maxLines: 20,
-                    minLines: 1,
+                    maxLines: 50,
+                    minLines: 40,
                     style: context.moonTypography!.body.text16
                         .copyWith(fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
@@ -90,9 +89,7 @@ class _RemarkButtomSheetState
                     style: context.moonTypography!.heading.text16
                         .copyWith(color: Colors.white),
                   ),
-                  backgroundColor: state.remark != state.oldRemark
-                      ? AppColor.primaryColor
-                      : context.moonColors!.beerus,
+                  backgroundColor: AppColor.primaryColor,
                 ),
               ],
             ),

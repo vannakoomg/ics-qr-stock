@@ -1,3 +1,4 @@
+import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,6 @@ import 'package:sos_mobile/gen/i18n/translations.g.dart';
 import '../../../../core/helper/local_data/storge_local.dart';
 import '../bloc/bloc.dart';
 import '../../../../app/base/page/base_page_bloc_state.dart';
-import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 
 @RoutePage()
 class ScanStockPage extends StatefulWidget {
@@ -165,22 +165,34 @@ class _ScanStockPageState
                             child: MoonCircularLoader(sizeValue: 20),
                           )
                         : state.isAssetNull
-                            ? Center(
-                                child: Text(
-                                  t.scan.assetNull,
-                                  style: context.moonTypography!.body.text18
-                                      .copyWith(
-                                          color: const Color.fromARGB(
-                                              255, 128, 39, 0)),
-                                  textAlign: TextAlign.center,
+                            ? Container(
+                                padding: const EdgeInsets.all(kPadding2 * 2),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      MoonIcons.other_smile_24_light,
+                                      size: 60,
+                                    ),
+                                    Text(state.assetId),
+                                    kPadding.gap,
+                                    Text(
+                                      t.scan.assetNull,
+                                      style:
+                                          context.moonTypography!.body.text14,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
                                 ),
                               )
                             : state.asset != null
                                 ? SingleChildScrollView(
-                                  child: Container(
+                                    child: Container(
                                       width: double.infinity,
                                       padding: const EdgeInsets.all(kPadding),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Stack(
                                             children: [
@@ -192,7 +204,8 @@ class _ScanStockPageState
                                                       width: double.infinity,
                                                       decoration: BoxDecoration(
                                                           color: context
-                                                              .moonColors!.beerus,
+                                                              .moonColors!
+                                                              .beerus,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5)),
@@ -203,7 +216,6 @@ class _ScanStockPageState
                                                           child: Text(
                                                         t.scan.noImage,
                                                       ))),
-            
                                               if (state.asset!.count_status!)
                                                 Positioned(
                                                     right: 0,
@@ -219,109 +231,161 @@ class _ScanStockPageState
                                                             .body
                                                             .text14
                                                             .copyWith(
-                                                                color:
-                                                                    Colors.white),
+                                                                color: Colors
+                                                                    .white),
                                                       ),
                                                     )),
                                             ],
                                           ),
                                           kPadding.gap,
                                           Container(
+                                            padding:
+                                                const EdgeInsets.all(kPadding),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                    color: context
+                                                        .moonColors!.beerus)),
                                             width: double.infinity,
-                                            // padding:
-                                            //     const EdgeInsets.all(kPadding),
-                                            // decoration: BoxDecoration(
-                                            //     borderRadius:
-                                            //         BorderRadius.circular(5),
-                                            //     border: Border.all(
-                                            //       color:
-                                            //           context.moonColors!.beerus
-                                            //     )),
                                             child: Column(
                                               children: [
                                                 Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Expanded(child: Text("${t.scan.nameEn}", style: context
-                                                            .moonTypography!.body.text16.copyWith(
-                                                              color: context.moonColors!.trunks
-                                                            ),)),
-                                                    Expanded(flex: 2,
+                                                    Expanded(
+                                                        child: Text(
+                                                      t.scan.id,
+                                                      style: context
+                                                          .moonTypography!
+                                                          .body
+                                                          .text16
+                                                          .copyWith(
+                                                              color: context
+                                                                  .moonColors!
+                                                                  .trunks),
+                                                    )),
+                                                    const Text(": "),
+                                                    Expanded(
+                                                      flex: 6,
                                                       child: Text(
-                                                        "${state.asset!.name}",
+                                                        "${state.asset!.asset_number}",
                                                         style: context
-                                                            .moonTypography!.body.text18,
+                                                            .moonTypography!
+                                                            .body
+                                                            .text18,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 kPadding.gap,
-                                                 Row(
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Expanded(child: Text("${t.scan.nameKh}", style: context
-                                                            .moonTypography!.body.text16.copyWith(
-                                                              color: context.moonColors!.trunks
-                                                            ),)),
-                                                    Expanded(flex: 2,
+                                                    Expanded(
+                                                        child: Text(
+                                                      t.scan.des,
+                                                      style: context
+                                                          .moonTypography!
+                                                          .body
+                                                          .text16
+                                                          .copyWith(
+                                                              color: context
+                                                                  .moonColors!
+                                                                  .trunks),
+                                                    )),
+                                                    const Text(": "),
+                                                    Expanded(
+                                                      flex: 6,
                                                       child: Text(
-                                                        "${state.asset!.description_in_khmer}",
+                                                        "${state.asset!.name}askdjf;ksajkfjals;kjjsajkfj (${state.asset!.description_in_khmer})",
                                                         style: context
-                                                            .moonTypography!.body.text18,
+                                                            .moonTypography!
+                                                            .body
+                                                            .text18,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                               
                                               ],
                                             ),
                                           ),
                                           kPadding.gap,
-                                          // if(state.asset!.remark!.isNotEmpty&& state.asset!.remark!=" ")
-                                       GestureDetector(
-                                        onTap: ()async{
-                                     RemarkHH rr = await RemarkButtomSheet.showBottomSheet(context, state.asset!.remark!.trim());
-                                     if(rr.isRemark){
-                                      
-                                      bloc.add(ClickConfrim(rr.remark));
-                                     }
-                                        },
-                                         child: Container(width: double.infinity,
-                                         padding: EdgeInsets.all(kPadding2),
-                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: context.moonColors!.trunks
+                                          Text(
+                                            t.scan.remark,
+                                            style: context
+                                                .moonTypography!.body.text12,
                                           ),
-                                          borderRadius: BorderRadius.circular(kPadding)
-                                          
-                                         ),
-                                         child: Text("${state.asset!.remark!.isEmpty || state.asset!.remark==' '?t.scan.remark:state.asset!.remark}"),),
-                                       )
-                               ],
-                               ),
-                              ),
-                              )
+                                          kPadding.gap,
+
+                                          // if(state.asset!.remark!.isNotEmpty&& state.asset!.remark!=" ")
+                                          GestureDetector(
+                                            onTap: () async {
+                                              RemarkHH rr =
+                                                  await RemarkButtomSheet
+                                                      .showBottomSheet(
+                                                          context,
+                                                          state.asset!.remark!
+                                                              .trim());
+                                              if (rr.isRemark) {
+                                                bloc.add(ClickConfrim(
+                                                    rr.remark, true));
+                                              }
+                                            },
+                                            child: Container(
+                                              width: double.infinity,
+                                              padding: const EdgeInsets.all(
+                                                  kPadding2),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: context
+                                                          .moonColors!.beerus),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          kPadding)),
+                                              child: Text(
+                                                  "${state.asset!.remark!.isEmpty || state.asset!.remark == ' ' ? t.scan.remarkDes : state.asset!.remark}"),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
                                 : const SizedBox.shrink()),
                 Padding(
                   padding: const EdgeInsets.all(kPadding2),
                   child: Row(
                     children: [
-                      Expanded(
-                              child: MoonButton(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: AppColor.primaryColor)),
-                                isFullWidth: true,
-                                onTap: () async {
-                                  bloc.add(ClickConfrim(state.remark));
-                                },
-                                label: Text(
-                                  t.scan.verify,
-                                  style: context.moonTypography!.heading.text16
-                                      .copyWith(color: AppColor.primaryColor),
-                                ),
-                              ),
-                            ), kPadding.gap,
+                      if (state.asset != null)
+                        Expanded(
+                          child: MoonButton(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                    color: state.asset!.count_status!
+                                        ? AppColor.dangerColor
+                                        : AppColor.primaryColor)),
+                            isFullWidth: true,
+                            onTap: () async {
+                              bloc.add(ClickConfrim(
+                                  state.remark, !state.asset!.count_status!));
+                            },
+                            label: Text(
+                              state.asset!.count_status!
+                                  ? t.scan.unVerify
+                                  : t.scan.verify,
+                              style: context.moonTypography!.heading.text16
+                                  .copyWith(
+                                      color: state.asset!.count_status!
+                                          ? AppColor.dangerColor
+                                          : AppColor.primaryColor),
+                            ),
+                          ),
+                        ),
+                      kPadding.gap,
                       Expanded(
                         child: MoonButton(
                           onTap: () async {
@@ -351,7 +415,7 @@ class _ScanStockPageState
                                       return false;
                                     }
                                     debugPrint("---------true");
-                        
+
                                     return true;
                                   },
                                 ),
@@ -364,7 +428,8 @@ class _ScanStockPageState
                             MoonIcons.security_qr_code_alternative_24_regular,
                             color: AppColor.primaryColor,
                           ),
-                          backgroundColor: AppColor.primaryColor.withOpacity(0.5),
+                          backgroundColor:
+                              AppColor.primaryColor.withOpacity(0.5),
                         ),
                       ),
                     ],
@@ -373,7 +438,7 @@ class _ScanStockPageState
               ],
             ),
           );
-        }, 
+        },
       ),
     );
   }

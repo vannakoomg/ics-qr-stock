@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:injectable/injectable.dart';
 import 'package:moon_design/moon_design.dart';
+import 'package:sos_mobile/config/message/error_message.dart';
 import 'package:sos_mobile/di/di.dart';
 import 'package:sos_mobile/config/router/page_route/app_route_info.dart';
 import 'package:sos_mobile/core/constants/constants.dart';
@@ -18,6 +19,7 @@ abstract class BasePopupInfoMapper {
 class AppPopupInfoMapper extends BasePopupInfoMapper {
   @override
   Widget map(AppPopupInfo appPopupInfo, IAppNavigator navigator) {
+    debugPrint("you are on error mode ");
     return appPopupInfo.when(
       errorDialog: (
         message,
@@ -27,31 +29,7 @@ class AppPopupInfoMapper extends BasePopupInfoMapper {
         titleClose,
         canDismiss,
       ) =>
-          AlertDialog(
-        title: const Text('Error'),
-        titlePadding:
-            const EdgeInsets.all(kPadding2).copyWith(bottom: kPadding / 2),
-        contentPadding: const EdgeInsets.symmetric(horizontal: kPadding2),
-        actionsPadding: const EdgeInsets.all(kPadding2),
-        content: Text(message ?? ''),
-        actions: [
-          MoonButton(
-            onTap: () {
-              Navigator.pop(navigator.context);
-            },
-            label: const Text("Back"),
-          )
-        ],
-      ),
-      //     FailureDialog(
-      //   title: title,
-      //   message: message,
-      //   onClose: onClose,
-      //   onDismiss: onDismiss,
-      //   titleClose: titleClose,
-      //   canDismiss: canDismiss ?? true,
-      //   navigator: navigator,
-      // ),
+          ErrorMessage(message: message ?? ""),
       infoDialog: (
         message,
         onLeftAction,
@@ -86,29 +64,38 @@ class AppPopupInfoMapper extends BasePopupInfoMapper {
         // );
       },
       errorWithRetryDialog: (message) {
-        return const SizedBox.shrink();
-        // return CommonDialog(
-        //   actions: [
-        //     PopupButton(
-        //       text: S.current.cancel,
-        //       onPressed: Func0(() => navigator.pop()),
-        //     ),
-        //     PopupButton(
-        //       text: S.current.retry,
-        //       onPressed: onRetryPressed ?? Func0(() => navigator.pop()),
-        //       isDefault: true,
-        //     ),
-        //   ],
-        //   message: message,
-        // );
+        return Padding(
+          padding: const EdgeInsets.all(kPadding2),
+          child: MoonModal(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding2, vertical: kPadding2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(t.common.errorTitle1,
+                      style: MoonTypography.typography.heading.text14),
+                  const Gap(kPadding),
+                  Text(t.common.errorDes1,
+                      style: MoonTypography.typography.body.text12),
+                  const Gap(kPadding2),
+                  MoonFilledButton(
+                    isFullWidth: true,
+                    buttonSize: MoonButtonSize.md,
+                    label: Text(t.common.ok),
+                    onTap: () {
+                      navigator.pop();
+                      // onPressedButton.call();
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
       },
 
-      addNewQuestionModalBottomSheet: () => const Padding(
-        padding: EdgeInsets.only(
-          top: 0,
-        ),
-        child: Text(""),
-      ),
       unAuthenticated: (String message, void Function() onPressedButton) =>
           Padding(
         padding: const EdgeInsets.all(kPadding2),
@@ -142,7 +129,6 @@ class AppPopupInfoMapper extends BasePopupInfoMapper {
       ),
       customDialog: (Widget child) => child,
       modalLogin: () => const ModalLogin(),
-      // ),
     );
   }
 }

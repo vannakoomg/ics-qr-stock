@@ -31,8 +31,10 @@ abstract class BaseBlocDeligate<E extends BaseEvent, S extends BaseState>
     try {
       await action.call();
     } catch (e) {
+      debugPrint("addException ====11111");
       await onError?.call(e);
       addException(e);
+
       if (e is DioException) {
         debugPrint('is DIO Error => ${e.response?.data}');
       }
@@ -40,22 +42,27 @@ abstract class BaseBlocDeligate<E extends BaseEvent, S extends BaseState>
   }
 
   void addException(Object error) {
+    // debugPrint("addException ====");
     if (error is DioException) {
-      appRoute.showGeneralDialog(
-        AppPopupInfo.errorDialog(
-          title: 'Somethings went wrong!',
-          message: error.response?.data['message'],
-        ),
-      );
-      return;
+      try {
+        appRoute.showDialog(
+          AppPopupInfo.errorDialog(
+            message: error.response?.data['message'],
+          ),
+        );
+        return;
+      } catch (value) {
+        appRoute.showDialog(
+          AppPopupInfo.errorDialog(
+            message: "$error",
+          ),
+        );
+      }
     }
 
     appRoute.showDialog(
-      AppPopupInfo.unAuthenticated(
+      AppPopupInfo.errorDialog(
         message: error.toString(),
-        onPressedButton: () {
-          appRoute.replaceAll([const AppRouteInfo.login()]);
-        },
       ),
     );
   }

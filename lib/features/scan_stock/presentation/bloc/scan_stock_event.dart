@@ -24,10 +24,10 @@ class ClickLogout extends ScanStockEvent with _$ClickLogout {
 
 @freezed
 class ClickConfrim extends ScanStockEvent with _$ClickConfrim {
-  factory ClickConfrim(String remark) = _ClickConfrim;
-}
-@freezed
-class RemarkChangedEvent extends ScanStockEvent with _$RemarkChangedEvent{
-  factory RemarkChangedEvent(String remark) = _RemarkChangedEvent;
+  factory ClickConfrim(String remark, bool isVerify) = _ClickConfrim;
 }
 
+@freezed
+class RemarkChangedEvent extends ScanStockEvent with _$RemarkChangedEvent {
+  factory RemarkChangedEvent(String remark) = _RemarkChangedEvent;
+}

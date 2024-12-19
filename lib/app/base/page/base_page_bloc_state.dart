@@ -5,6 +5,7 @@ import 'package:sos_mobile/app/base/bloc/base_bloc.dart';
 import 'package:sos_mobile/config/exceptions/app_exception.dart';
 import 'package:sos_mobile/core/helper/local_data/storge_local.dart';
 
+import '../../../config/router/popup_route/app_popup_info.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/utils/log/log_utils.dart';
 import '../../../di/di.dart';
@@ -162,10 +163,10 @@ abstract class BasePageBlocStateDelegate<T extends StatefulWidget,
       if (error is AppException) {
         final AppExceptionType appExceptionType = error.exceptionType;
         switch (appExceptionType) {
-          // case AppExceptionType.service:
-          //   appRoute.showDialog(
-          //       const AppPopupInfo.errorDialog(message: 'Session Expired!'));
-          //   break;
+          case AppExceptionType.service:
+            appRoute.showDialog(
+                const AppPopupInfo.errorDialog(message: 'Session Expired!'));
+            break;
 
           default:
             break;

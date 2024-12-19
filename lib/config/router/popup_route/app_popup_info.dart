@@ -43,8 +43,5 @@ class AppPopupInfo with _$AppPopupInfo {
     required GestureTapCallback onPressedButton,
   }) = _UnAuthenticated;
 
-  const factory AppPopupInfo.addNewQuestionModalBottomSheet() =
-      _AddNewQuestionModalBottomSheet;
-
   const factory AppPopupInfo.modalLogin() = _ModalLogin;
 }
