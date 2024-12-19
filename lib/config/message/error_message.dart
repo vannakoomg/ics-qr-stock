@@ -52,7 +52,7 @@ class ErrorMessage extends StatelessWidget {
                         },
                         backgroundColor: AppColor.primaryColor,
                         textColor: Colors.white,
-                        label: Text(t.common.close),
+                        label: const Text("Back"),
                       )
                     ],
                   )),
