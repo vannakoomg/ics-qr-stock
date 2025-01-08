@@ -26,15 +26,17 @@
         "buttonName": "Scan",
         "language": "EN",
         "logoutDes": "Do you want to logging out ? Time we’ll have to say goodbye",
-        "remark": "Remake",
+        "remark": "Remark",
         "remarkDes": "...",
         "assetNull": "Oops! This itam not found.\n Give it another try!",
         "noImage": "This asset no image",
         "scantitle": "Scan any Qr Code",
         "des": "Desc.",
-        "verifyed": "verifyed",
-        "verify": "verify",
-        "unVerify": "unverified",
+        "verifyed": "Verifyed",
+        "verify": "Verify",
+        "unVerify": "Unverified",
+        "poDate": "PO.Date",
+        "updateBy": "Updated by",
         "id": "Id"
     }
 }

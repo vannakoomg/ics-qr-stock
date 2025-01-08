@@ -86,6 +86,7 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
         debugPrint("-------------------------------------------");
         emit(state.copyWith(isLoadingRemark: true));
         await _remarkAssetUsecase.excecute(RemarkInput(
+            updated_by: LocalStorage.getIntValue(SharedPreferenceKeys.userId),
             remark: event.remark == "" ? " " : event.remark,
             assetId: state.assetId,
             isVerify: event.isVerify,

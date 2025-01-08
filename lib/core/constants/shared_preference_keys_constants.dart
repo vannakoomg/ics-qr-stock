@@ -7,4 +7,5 @@ class SharedPreferenceKeys {
   static const name = 'name';
   static const theme = 'theme';
   static const languages = "languages";
+  static const userId = "userId";
 }

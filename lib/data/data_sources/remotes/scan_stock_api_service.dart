@@ -43,12 +43,14 @@ class RemarkInput {
       {required this.remark,
       required this.assetId,
       required this.updateAt,
+      required this.updated_by,
       required this.isVerify});
 
   final String remark;
   final String assetId;
   final String updateAt;
   final bool isVerify;
+  final int updated_by;
 
   Map<String, dynamic> toJson() {
     return {
@@ -56,7 +58,8 @@ class RemarkInput {
         "asset_number": assetId,
         "status": isVerify,
         "remark": remark,
-        "updated_on": updateAt
+        "updated_on": updateAt,
+        "updated_by": updated_by
       },
     };
   }

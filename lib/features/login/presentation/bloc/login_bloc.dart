@@ -65,6 +65,10 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
           key: SharedPreferenceKeys.accessToken,
           value: loginEnity[0].token,
         );
+        await LocalStorage.storeData(
+          key: SharedPreferenceKeys.userId,
+          value: loginEnity[0].userId,
+        );
         emit(state.copyWith(loading: false));
 
         appRoute.push(const AppRouteInfo.scanStock());

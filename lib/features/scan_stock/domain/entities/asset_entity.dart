@@ -10,6 +10,8 @@ class AssetEntity with _$AssetEntity {
     String? description_in_khmer,
     String? asset_number,
     String? image,
+    String? status_datetime,
+    String? updated_by,
     bool? count_status,
     String? remark,
   }) = _AssetEntity;

@@ -1,4 +1,3 @@
-import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -240,7 +239,7 @@ class _ScanStockPageState
                                           kPadding.gap,
                                           Container(
                                             padding:
-                                                const EdgeInsets.all(kPadding),
+                                                const EdgeInsets.all(kPadding2),
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
@@ -260,7 +259,7 @@ class _ScanStockPageState
                                                       style: context
                                                           .moonTypography!
                                                           .body
-                                                          .text16
+                                                          .text12
                                                           .copyWith(
                                                               color: context
                                                                   .moonColors!
@@ -268,13 +267,43 @@ class _ScanStockPageState
                                                     )),
                                                     const Text(": "),
                                                     Expanded(
-                                                      flex: 6,
+                                                      flex: 4,
                                                       child: Text(
                                                         "${state.asset!.asset_number}",
                                                         style: context
                                                             .moonTypography!
                                                             .body
-                                                            .text18,
+                                                            .text16,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                kPadding.gap,
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Expanded(
+                                                        child: Text(
+                                                      t.scan.poDate,
+                                                      style: context
+                                                          .moonTypography!
+                                                          .body
+                                                          .text12
+                                                          .copyWith(
+                                                              color: context
+                                                                  .moonColors!
+                                                                  .trunks),
+                                                    )),
+                                                    const Text(": "),
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child: Text(
+                                                        "${state.asset!.status_datetime}",
+                                                        style: context
+                                                            .moonTypography!
+                                                            .body
+                                                            .text16,
                                                       ),
                                                     ),
                                                   ],
@@ -290,7 +319,7 @@ class _ScanStockPageState
                                                       style: context
                                                           .moonTypography!
                                                           .body
-                                                          .text16
+                                                          .text12
                                                           .copyWith(
                                                               color: context
                                                                   .moonColors!
@@ -298,13 +327,42 @@ class _ScanStockPageState
                                                     )),
                                                     const Text(": "),
                                                     Expanded(
-                                                      flex: 6,
+                                                      flex: 4,
                                                       child: Text(
-                                                        "${state.asset!.name}askdjf;ksajkfjals;kjjsajkfj (${state.asset!.description_in_khmer})",
+                                                        "${state.asset!.name} (${state.asset!.description_in_khmer})",
                                                         style: context
                                                             .moonTypography!
                                                             .body
-                                                            .text18,
+                                                            .text16,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Expanded(
+                                                        child: Text(
+                                                      t.scan.updateBy,
+                                                      style: context
+                                                          .moonTypography!
+                                                          .body
+                                                          .text12
+                                                          .copyWith(
+                                                              color: context
+                                                                  .moonColors!
+                                                                  .trunks),
+                                                    )),
+                                                    const Text(": "),
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child: Text(
+                                                        "${state.asset!.updated_by}",
+                                                        style: context
+                                                            .moonTypography!
+                                                            .body
+                                                            .text16,
                                                       ),
                                                     ),
                                                   ],
@@ -389,38 +447,39 @@ class _ScanStockPageState
                       Expanded(
                         child: MoonButton(
                           onTap: () async {
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AiBarcodeScanner(
-                                  sheetTitle: t.scan.scantitle,
-                                  onDispose: () {
-                                    debugPrint("Barcode scanner disposed!");
-                                  },
-                                  hideGalleryButton: false,
-                                  controller: MobileScannerController(
-                                    detectionSpeed: DetectionSpeed.normal,
-                                  ),
-                                  onDetect: (BarcodeCapture capture) {},
-                                  validator: (value) {
-                                    if (value.barcodes.isEmpty) {
-                                      return false;
-                                    }
-                                    if (!(value.barcodes.first.rawValue
-                                            ?.contains('flutter.dev') ??
-                                        false)) {
-                                      debugPrint(
-                                          "---------false ${value.barcodes.first.rawValue}");
-                                      bloc.add(GetAssets(
-                                          '${value.barcodes.first.rawValue}'));
-                                      return false;
-                                    }
-                                    debugPrint("---------true");
+                            bloc.add(GetAssets('2-CIS-201-001-002'));
+                            // await Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => AiBarcodeScanner(
+                            //       sheetTitle: t.scan.scantitle,
+                            //       onDispose: () {
+                            //         debugPrint("Barcode scanner disposed!");
+                            //       },
+                            //       hideGalleryButton: false,
+                            //       controller: MobileScannerController(
+                            //         detectionSpeed: DetectionSpeed.normal,
+                            //       ),
+                            //       onDetect: (BarcodeCapture capture) {},
+                            //       validator: (value) {
+                            //         if (value.barcodes.isEmpty) {
+                            //           return false;
+                            //         }
+                            //         if (!(value.barcodes.first.rawValue
+                            //                 ?.contains('flutter.dev') ??
+                            //             false)) {
+                            //           debugPrint(
+                            //               "---------false ${value.barcodes.first.rawValue}");
+                            //           bloc.add(GetAssets(
+                            //               '${value.barcodes.first.rawValue}'));
+                            //           return false;
+                            //         }
+                            //         debugPrint("---------true");
 
-                                    return true;
-                                  },
-                                ),
-                              ),
-                            );
+                            //         return true;
+                            //       },
+                            //     ),
+                            //   ),
+                            // );
                           },
                           isFullWidth: true,
                           height: 50,
