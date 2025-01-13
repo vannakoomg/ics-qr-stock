@@ -34,7 +34,6 @@ abstract class BaseBlocDeligate<E extends BaseEvent, S extends BaseState>
       debugPrint("addException ====11111");
       await onError?.call(e);
       addException(e);
-
       if (e is DioException) {
         debugPrint('is DIO Error => ${e.response?.data}');
       }

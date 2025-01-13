@@ -6,6 +6,7 @@ import 'package:sos_mobile/core/constants/constants.dart';
 import 'package:sos_mobile/features/scan_stock/presentation/pages/remark_buttomsheet.dart';
 import 'package:sos_mobile/features/scan_stock/presentation/widgets/image_beas64.dart';
 import 'package:sos_mobile/gen/i18n/translations.g.dart';
+import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 
 import '../../../../core/helper/local_data/storge_local.dart';
 import '../bloc/bloc.dart';
@@ -447,39 +448,39 @@ class _ScanStockPageState
                       Expanded(
                         child: MoonButton(
                           onTap: () async {
-                            bloc.add(GetAssets('2-CIS-201-001-002'));
-                            // await Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => AiBarcodeScanner(
-                            //       sheetTitle: t.scan.scantitle,
-                            //       onDispose: () {
-                            //         debugPrint("Barcode scanner disposed!");
-                            //       },
-                            //       hideGalleryButton: false,
-                            //       controller: MobileScannerController(
-                            //         detectionSpeed: DetectionSpeed.normal,
-                            //       ),
-                            //       onDetect: (BarcodeCapture capture) {},
-                            //       validator: (value) {
-                            //         if (value.barcodes.isEmpty) {
-                            //           return false;
-                            //         }
-                            //         if (!(value.barcodes.first.rawValue
-                            //                 ?.contains('flutter.dev') ??
-                            //             false)) {
-                            //           debugPrint(
-                            //               "---------false ${value.barcodes.first.rawValue}");
-                            //           bloc.add(GetAssets(
-                            //               '${value.barcodes.first.rawValue}'));
-                            //           return false;
-                            //         }
-                            //         debugPrint("---------true");
+                            // bloc.add(GetAssets('2-CIS-201-001-002'));
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AiBarcodeScanner(
+                                  sheetTitle: t.scan.scantitle,
+                                  onDispose: () {
+                                    debugPrint("Barcode scanner disposed!");
+                                  },
+                                  hideGalleryButton: false,
+                                  controller: MobileScannerController(
+                                    detectionSpeed: DetectionSpeed.normal,
+                                  ),
+                                  onDetect: (BarcodeCapture capture) {},
+                                  validator: (value) {
+                                    if (value.barcodes.isEmpty) {
+                                      return false;
+                                    }
+                                    if (!(value.barcodes.first.rawValue
+                                            ?.contains('flutter.dev') ??
+                                        false)) {
+                                      debugPrint(
+                                          "---------false ${value.barcodes.first.rawValue}");
+                                      bloc.add(GetAssets(
+                                          '${value.barcodes.first.rawValue}'));
+                                      return false;
+                                    }
+                                    debugPrint("---------true");
 
-                            //         return true;
-                            //       },
-                            //     ),
-                            //   ),
-                            // );
+                                    return true;
+                                  },
+                                ),
+                              ),
+                            );
                           },
                           isFullWidth: true,
                           height: 50,
