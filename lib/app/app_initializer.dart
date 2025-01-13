@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -21,28 +22,28 @@ class AppInitializer {
 }
 
 Future<void> _initSystemUIPreferences() async {
-  // await SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.edgeToEdge,
-  //   overlays: [
-  //     // SystemUiOverlay.top,
-  //   ],
-  // );
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: [
+      // SystemUiOverlay.top,
+    ],
+  );
 
-  // SystemChrome.setSystemUIOverlayStyle(
-  //     const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // await SystemChrome.setSystemUIChangeCallback(
-  //     (systemOverlaysAreVisible) async {
-  //   if (systemOverlaysAreVisible) {
-  //     await Future.delayed(2.seconds);
-  //     await SystemChrome.restoreSystemUIOverlays();
-  //   }
-  // });
+  await SystemChrome.setSystemUIChangeCallback(
+      (systemOverlaysAreVisible) async {
+    if (systemOverlaysAreVisible) {
+      await Future.delayed(Duration(seconds: 1));
+      await SystemChrome.restoreSystemUIOverlays();
+    }
+  });
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
