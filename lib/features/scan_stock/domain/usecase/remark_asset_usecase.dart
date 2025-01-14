@@ -4,11 +4,11 @@ import 'package:sos_mobile/data/data_sources/remotes/scan_stock_api_service.dart
 import 'package:sos_mobile/features/scan_stock/domain/repository/scan_stock_repository.dart';
 
 @Injectable()
-class RemarkAssetUsecase extends BaseUseCase<RemarkInput, void> {
+class RemarkAssetUsecase extends BaseUseCase<VerifyInpust, void> {
   final ScanStockRepository _repository;
   RemarkAssetUsecase(this._repository);
   @override
-  Future<void> excecute(RemarkInput input) async {
+  Future<void> excecute(VerifyInpust input) async {
     await _repository.remarkAsset(input);
   }
 }

@@ -112,7 +112,7 @@ flutter_native_splash:
   # dark:
   #   color: "#000000"  # Background color for dark mode
   #   image: assets/image/logo.jpg  # Optional: Different splash image for dark mode
-  image: assets/image/logo.jpg  # Default splash image (used if no mode is specified)
+  image: assets/image/logo.png  # Default splash image (used if no mode is specified)
   android: true
   ios: true
   fullscreen: true

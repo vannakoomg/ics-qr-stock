@@ -17,7 +17,7 @@ class ScanStockRepositoryImpl implements ScanStockRepository {
   }
 
   @override
-  Future<void> remarkAsset(RemarkInput remark) async {
-    return await _apiService.remarkAsset(remarkInput: remark);
+  Future<void> remarkAsset(VerifyInpust remark) async {
+    return await _apiService.remarkAsset(VerifyInpust: remark);
   }
 }

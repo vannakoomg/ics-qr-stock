@@ -6,13 +6,16 @@ part 'asset_entity.freezed.dart';
 class AssetEntity with _$AssetEntity {
   factory AssetEntity({
     int? id,
-    String? name,
-    String? description_in_khmer,
-    String? asset_number,
+    @Default('') String name,
+    @Default('') String description_in_khmer,
+    @Default('') String asset_number,
+    @Default('') String room,
+    @Default('') String campus,
     String? image,
-    String? status_datetime,
-    String? updated_by,
+    @Default('') String status_datetime,
+    @Default('') String updated_by,
     bool? count_status,
-    String? remark,
+    @Default('') String remark,
+    @Default('') String quality,
   }) = _AssetEntity;
 }

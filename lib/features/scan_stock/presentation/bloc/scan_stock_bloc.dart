@@ -34,6 +34,15 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
     on<GetAssets>(_getAsset);
     on<ClickConfrim>(_clickConfirm);
     on<RemarkChangedEvent>(_remarkChanged);
+    on<ClickCampus>(_onClickCampus);
+    on<ClickOutSide>(_onClickOutside);
+    on<ClickSelectCampus>(_onClickSelectCampus);
+    on<RoomChanged>(_onroomChanged);
+    on<DescEnChanged>(_onDescEnChanged);
+    on<DescKhChanged>(_onDescKhChanged);
+    on<ClickQuality>(_onClickQuslity);
+    on<ClickSelectQuality>(_onClickSelectQuality);
+    on<TabTextfile>(_onTabTextfile);
   }
   FutureOr<void> _getAsset(
       GetAssets event, Emitter<ScanStockState> emit) async {
@@ -57,9 +66,9 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
               isLoading: false,
               asset: ass[0],
               isAssetNull: false,
-              remark: ass[0].remark!.trimRight(),
+              remark: ass[0].remark.trimRight(),
               remarkController:
-                  TextEditingController(text: ass[0].remark!.trimRight())));
+                  TextEditingController(text: ass[0].remark.trimRight())));
         }
       },
       onError: (error) async {
@@ -85,13 +94,18 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
         unFocus();
         debugPrint("-------------------------------------------");
         emit(state.copyWith(isLoadingRemark: true));
-        await _remarkAssetUsecase.excecute(RemarkInput(
-            updated_by: LocalStorage.getIntValue(SharedPreferenceKeys.userId),
-            remark: event.remark == "" ? " " : event.remark,
-            assetId: state.assetId,
-            isVerify: event.isVerify,
-            updateAt:
-                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
+        await _remarkAssetUsecase.excecute(VerifyInpust(
+          updated_by: LocalStorage.getIntValue(SharedPreferenceKeys.userId),
+          remark: event.remark == "" ? " " : event.remark,
+          assetId: state.assetId,
+          isVerify: event.isVerify,
+          updateAt: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+          campus: state.asset!.campus,
+          room: state.asset!.room,
+          description_in_khmer: state.asset!.description_in_khmer,
+          name: state.asset!.name,
+          quality: state.asset!.quality,
+        ));
         emit(state.copyWith(
             isLoadingRemark: false,
             asset: state.asset!.copyWith(
@@ -118,5 +132,63 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       ClickLogout event, Emitter<ScanStockState> emit) {
     LocalStorage.storeData(key: SharedPreferenceKeys.accessToken, value: "");
     appRoute.replaceAll([const AppRouteInfo.login()]);
+  }
+
+  FutureOr<void> _onClickCampus(
+      ClickCampus event, Emitter<ScanStockState> emit) {
+    unFocus();
+    emit(state.copyWith(isShowCampus: !state.isShowCampus));
+  }
+
+  FutureOr<void> _onClickQuslity(
+      ClickQuality event, Emitter<ScanStockState> emit) {
+    unFocus();
+    emit(state.copyWith(isShowQuality: !state.isShowQuality));
+  }
+
+  FutureOr<void> _onClickOutside(
+      ClickOutSide event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(
+        isShowCampus: false, isShowQuality: false, isTabTextfile: false));
+  }
+
+  FutureOr<void> _onClickSelectCampus(
+      ClickSelectCampus event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(
+        asset: state.asset!.copyWith(campus: event.campus),
+        isShowCampus: false));
+  }
+
+  FutureOr<void> _onClickSelectQuality(
+      ClickSelectQuality event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(
+        asset: state.asset!.copyWith(quality: event.quality),
+        isShowQuality: false));
+  }
+
+  FutureOr<void> _onDescKhChanged(
+      DescKhChanged event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(
+      asset: state.asset!.copyWith(description_in_khmer: event.value),
+    ));
+  }
+
+  FutureOr<void> _onDescEnChanged(
+      DescEnChanged event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(
+      asset: state.asset!.copyWith(name: event.value),
+    ));
+  }
+
+  FutureOr<void> _onroomChanged(
+      RoomChanged event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(
+      asset: state.asset!.copyWith(room: event.value),
+    ));
+  }
+
+  FutureOr<void> _onTabTextfile(
+      TabTextfile event, Emitter<ScanStockState> emit) {
+    emit(state.copyWith(isTabTextfile: true));
   }
 }

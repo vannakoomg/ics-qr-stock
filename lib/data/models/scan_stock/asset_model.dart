@@ -11,10 +11,13 @@ class AssetModel {
       required this.asset_number,
       required this.image,
       required this.id,
+      required this.campus,
+      required this.room,
       required this.updated_by,
       required this.status_datetime,
       required this.count_status,
-      required this.remark});
+      required this.remark,
+      required this.quality});
 
   final int? id;
   final String? name;
@@ -25,6 +28,9 @@ class AssetModel {
   final String? remark;
   final String? updated_by;
   final bool? count_status;
+  final String? room;
+  final String? campus;
+  final String? quality;
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
       _$AssetModelFromJson(json);
@@ -34,12 +40,15 @@ class AssetModel {
 extension AssetModelToEntity on AssetModel {
   AssetEntity toEntity() => AssetEntity(
       id: id,
-      updated_by: updated_by,
+      updated_by: updated_by ?? "",
       status_datetime: status_datetime ?? "",
-      asset_number: asset_number,
+      asset_number: asset_number ?? "",
       image: image,
-      description_in_khmer: description_in_khmer,
-      name: name,
+      quality: quality ?? "",
+      description_in_khmer: description_in_khmer ?? "",
+      name: name ?? "",
+      campus: campus ?? "",
+      room: room ?? "",
       count_status: count_status ?? false,
       remark: remark ?? "");
 }

@@ -17,7 +17,7 @@ abstract class ScanStockApiService {
   Future<DataResponse<List<AssetModel>>> getAssetDetail(
       {@Body() required AssetInput assetInput});
   @POST('asset_update')
-  Future<void> remarkAsset({@Body() required RemarkInput remarkInput});
+  Future<void> remarkAsset({@Body() required VerifyInpust VerifyInpust});
 }
 
 @JsonSerializable(createToJson: false)
@@ -38,11 +38,16 @@ class AssetInput {
 }
 
 @JsonSerializable(createToJson: false)
-class RemarkInput {
-  RemarkInput(
+class VerifyInpust {
+  VerifyInpust(
       {required this.remark,
       required this.assetId,
       required this.updateAt,
+      required this.campus,
+      required this.description_in_khmer,
+      required this.name,
+      required this.quality,
+      required this.room,
       required this.updated_by,
       required this.isVerify});
 
@@ -51,6 +56,11 @@ class RemarkInput {
   final String updateAt;
   final bool isVerify;
   final int updated_by;
+  final String campus;
+  final String name;
+  final String description_in_khmer;
+  final String room;
+  final String quality;
 
   Map<String, dynamic> toJson() {
     return {
@@ -59,7 +69,12 @@ class RemarkInput {
         "status": isVerify,
         "remark": remark,
         "updated_on": updateAt,
-        "updated_by": updated_by
+        "updated_by": updated_by,
+        "room": room,
+        "quality": quality,
+        "description_in_khmer": description_in_khmer,
+        "name": name,
+        "campus": campus
       },
     };
   }
