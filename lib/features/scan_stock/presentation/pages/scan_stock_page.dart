@@ -582,38 +582,37 @@ class _ScanStockPageState
                           Expanded(
                             child: MoonButton(
                               onTap: () async {
-                                bloc.add(GetAssets('2-CIS-202-001-014'));
-                                // await Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //     builder: (context) => AiBarcodeScanner(
-                                //       sheetTitle: t.scan.scantitle,
-                                //       onDispose: () {
-                                //         debugPrint("Barcode scanner disposed!");
-                                //       },
-                                //       hideGalleryButton: false,
-                                //       controller: MobileScannerController(
-                                //         detectionSpeed: DetectionSpeed.normal,
-                                //       ),
-                                //       onDetect: (BarcodeCapture capture) {},
-                                //       validator: (value) {
-                                //         if (value.barcodes.isEmpty) {
-                                //           return false;
-                                //         }
-                                //         if (!(value.barcodes.first.rawValue
-                                //                 ?.contains('flutter.dev') ??
-                                //             false)) {
-                                //           debugPrint(
-                                //               "---------false ${value.barcodes.first.rawValue}");
-                                //           bloc.add(GetAssets(
-                                //               '${value.barcodes.first.rawValue}'));
-                                //           return false;
-                                //         }
-                                //         debugPrint("---------true");
-                                //         return true;
-                                //       },
-                                //     ),
-                                //   ),
-                                // );
+                                await Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => AiBarcodeScanner(
+                                      sheetTitle: t.scan.scantitle,
+                                      onDispose: () {
+                                        debugPrint("Barcode scanner disposed!");
+                                      },
+                                      hideGalleryButton: false,
+                                      controller: MobileScannerController(
+                                        detectionSpeed: DetectionSpeed.normal,
+                                      ),
+                                      onDetect: (BarcodeCapture capture) {},
+                                      validator: (value) {
+                                        if (value.barcodes.isEmpty) {
+                                          return false;
+                                        }
+                                        if (!(value.barcodes.first.rawValue
+                                                ?.contains('flutter.dev') ??
+                                            false)) {
+                                          debugPrint(
+                                              "---------false ${value.barcodes.first.rawValue}");
+                                          bloc.add(GetAssets(
+                                              '${value.barcodes.first.rawValue}'));
+                                          return false;
+                                        }
+                                        debugPrint("---------true");
+                                        return true;
+                                      },
+                                    ),
+                                  ),
+                                );
                               },
                               isFullWidth: true,
                               height: 50,
