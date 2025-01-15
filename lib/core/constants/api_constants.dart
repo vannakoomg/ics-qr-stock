@@ -6,7 +6,7 @@ class BaseUrls {
   static const _DEV_BASE_URL = 'http://3.1.218.249/api/';
 
   static const _UAT_BASE_URL = 'http://...UAT.../';
-  static const _PROD_BASE_URL = 'http://110.235.242.227:8069/api/';
+  static const _PROD_BASE_URL = 'https://odoo2024.ics.edu.kh/api/';
 
   static const String baseUrl = _PROD_BASE_URL;
 }
