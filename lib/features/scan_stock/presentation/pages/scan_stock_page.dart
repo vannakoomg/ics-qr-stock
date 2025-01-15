@@ -23,7 +23,7 @@ class ScanStockPage extends StatefulWidget {
 }
 
 List<String> campus = ["Main Campus", "Calmette Campus", "N/A"];
-List<String> quality = ["High", "Miduim", "Low", "N/A"];
+List<String> quality = ["High", "Medium", "Low", "N/A"];
 
 class _ScanStockPageState
     extends BasePageBlocState<ScanStockPage, ScanStockBloc> {
