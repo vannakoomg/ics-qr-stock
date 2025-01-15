@@ -33,6 +33,7 @@
         "scantitle": "Scan any Qr Code",
         "desEn": "Desc. En",
         "desKh": "Desc. Kh",
+        "quality": "Quality",
         "campus": "Campus",
         "room": "Room",
         "verifyed": "Verifyed",
@@ -40,6 +41,7 @@
         "unVerify": "Unverified",
         "poDate": "PO.Date",
         "updateBy": "Updated by",
+        "unverifyDesc": "Are you sure you want to Unverify this asset?",
         "id": "Id"
     }
 }

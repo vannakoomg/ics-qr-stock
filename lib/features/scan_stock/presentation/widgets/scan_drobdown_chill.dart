@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:moon_design/moon_design.dart';
+import 'package:sos_mobile/utils/widgets/custom_textfile.dart';
 
 import '../../../../core/constants/constants.dart';
 
@@ -12,21 +13,12 @@ class ScanDrobdownChill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        ontap();
-      },
-      child: Container(
-        padding: const EdgeInsets.all(kPadding2),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: context.moonColors!.beerus)),
-        width: double.infinity,
-        child: Text(
-          title,
-          style: context.moonTypography!.body.text16
-              .copyWith(color: context.moonColors!.trunks),
-        ),
-      ),
-    );
+        onTap: () {
+          ontap();
+        },
+        child: CustomTextfield(
+          hintText: title,
+          controller: TextEditingController(text: title),
+        ));
   }
 }

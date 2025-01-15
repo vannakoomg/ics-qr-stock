@@ -77,15 +77,19 @@ class CustomTextfield extends StatelessWidget {
           onTap: () {
             ontap!();
           },
+          readOnly: readOnly,
+          style: context.moonTypography!.body.text16,
+          hintTextColor: color ?? context.moonColors!.trunks,
+          textColor: color ?? context.moonColors!.bulma,
           controller: controller,
           keyboardType: TextInputType.text,
-          // enabled: !state.loading,
           hintText: hintText,
           hasFloatingLabel: true,
           textInputSize: MoonTextInputSize.xl,
           onChanged: (value) {
             onChanged!(value);
           },
+          inactiveBorderColor: color ?? context.moonColors!.trunks,
         ),
       ],
     );

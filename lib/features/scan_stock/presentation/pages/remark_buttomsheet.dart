@@ -85,7 +85,7 @@ class _RemarkButtomSheetState
                     Navigator.pop(context, RemarkHH(true, state.remark));
                   },
                   label: Text(
-                    t.scan.verify,
+                    t.scan.remark,
                     style: context.moonTypography!.heading.text16
                         .copyWith(color: Colors.white),
                   ),

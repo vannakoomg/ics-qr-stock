@@ -16,6 +16,6 @@ class AssetEntity with _$AssetEntity {
     @Default('') String updated_by,
     bool? count_status,
     @Default('') String remark,
-    @Default('') String quality,
+    @Default('N/A') String quality,
   }) = _AssetEntity;
 }

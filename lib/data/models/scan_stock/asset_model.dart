@@ -17,7 +17,7 @@ class AssetModel {
       required this.status_datetime,
       required this.count_status,
       required this.remark,
-      required this.quality});
+      this.quality = "N/A"});
 
   final int? id;
   final String? name;
@@ -30,7 +30,7 @@ class AssetModel {
   final bool? count_status;
   final String? room;
   final String? campus;
-  final String? quality;
+  final String quality;
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
       _$AssetModelFromJson(json);
@@ -44,7 +44,7 @@ extension AssetModelToEntity on AssetModel {
       status_datetime: status_datetime ?? "",
       asset_number: asset_number ?? "",
       image: image,
-      quality: quality ?? "",
+      quality: quality ?? "N/A",
       description_in_khmer: description_in_khmer ?? "",
       name: name ?? "",
       campus: campus ?? "",

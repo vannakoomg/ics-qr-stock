@@ -63,12 +63,21 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
           ));
         } else {
           emit(state.copyWith(
-              isLoading: false,
-              asset: ass[0],
-              isAssetNull: false,
-              remark: ass[0].remark.trimRight(),
-              remarkController:
-                  TextEditingController(text: ass[0].remark.trimRight())));
+            isLoading: false,
+            asset: ass[0],
+            isAssetNull: false,
+            remark: ass[0].remark.trimRight(),
+          ));
+          AssetEntity assetData = ass[0];
+          emit(state.copyWith(
+              descEnController: TextEditingController(text: assetData.name),
+              descKhController:
+                  TextEditingController(text: assetData.description_in_khmer),
+              roomController: TextEditingController(text: assetData.room),
+              remarkController: TextEditingController(text: assetData.remark)));
+          if (assetData.quality == '') {
+            emit(state.copyWith(asset: assetData.copyWith(quality: "N/A")));
+          }
         }
       },
       onError: (error) async {
@@ -84,7 +93,7 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
 
   FutureOr<void> _remarkChanged(
       RemarkChangedEvent event, Emitter<ScanStockState> emit) {
-    emit(state.copyWith(remark: event.remark));
+    emit(state.copyWith(asset: state.asset!.copyWith(remark: event.remark)));
   }
 
   FutureOr<void> _clickConfirm(
@@ -93,10 +102,12 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
       () async {
         unFocus();
         debugPrint("-------------------------------------------");
+
         emit(state.copyWith(isLoadingRemark: true));
+        // appRoute.showDialog(appPopupInfo)
         await _remarkAssetUsecase.excecute(VerifyInpust(
           updated_by: LocalStorage.getIntValue(SharedPreferenceKeys.userId),
-          remark: event.remark == "" ? " " : event.remark,
+          remark: state.asset!.remark == "" ? " " : state.asset!.remark,
           assetId: state.assetId,
           isVerify: event.isVerify,
           updateAt: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
@@ -106,11 +117,15 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
           name: state.asset!.name,
           quality: state.asset!.quality,
         ));
+        List<AssetEntity> ass = await _getAssetDetailUsecase
+            .excecute(AssetInput(assetNumber: state.assetId));
+        // add(GetAssets(state.assetId));
+
         emit(state.copyWith(
             isLoadingRemark: false,
             asset: state.asset!.copyWith(
+              updated_by: ass[0].updated_by,
               count_status: event.isVerify,
-              remark: event.remark,
             )));
       },
     );
@@ -136,13 +151,11 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
 
   FutureOr<void> _onClickCampus(
       ClickCampus event, Emitter<ScanStockState> emit) {
-    unFocus();
     emit(state.copyWith(isShowCampus: !state.isShowCampus));
   }
 
   FutureOr<void> _onClickQuslity(
       ClickQuality event, Emitter<ScanStockState> emit) {
-    unFocus();
     emit(state.copyWith(isShowQuality: !state.isShowQuality));
   }
 
@@ -190,5 +203,18 @@ class ScanStockBloc extends BaseBloc<ScanStockEvent, ScanStockState> {
   FutureOr<void> _onTabTextfile(
       TabTextfile event, Emitter<ScanStockState> emit) {
     emit(state.copyWith(isTabTextfile: true));
+  }
+}
+
+extension AssetEntityValidator on AssetEntity {
+  bool hasEmptyFields() {
+    // Count the empty fields ("" or null)
+    int emptyFieldCount = 0;
+    if (name.isEmpty) emptyFieldCount++;
+    if (description_in_khmer.isEmpty) emptyFieldCount++;
+    if (room.isEmpty) emptyFieldCount++;
+    if (campus.isEmpty) emptyFieldCount++;
+    if (quality.isEmpty) emptyFieldCount++;
+    return emptyFieldCount > 0; // If there's one or more empty fields
   }
 }

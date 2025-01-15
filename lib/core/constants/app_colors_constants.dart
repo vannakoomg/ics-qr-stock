@@ -20,7 +20,7 @@ class AppColor {
 
   // for button
   static const Color buttonColor = Color.fromARGB(255, 219, 22, 81);
-  static const Color warningColor = Color(0xffAAA505);
+  static const Color warningColor = Color.fromARGB(255, 228, 112, 35);
   static const Color dangerColor = Color.fromARGB(255, 240, 38, 65);
   static const Color successColor = Color.fromARGB(255, 46, 137, 61);
 }

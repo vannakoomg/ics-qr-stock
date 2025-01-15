@@ -76,3 +76,8 @@ class ClickSelectQuality extends ScanStockEvent with _$ClickSelectQuality {
 class TabTextfile extends ScanStockEvent with _$TabTextfile {
   factory TabTextfile() = _TabTextfile;
 }
+
+@freezed
+class GetRemarkBig extends ScanStockEvent with _$GetRemarkBig {
+  factory GetRemarkBig(String value) = _GetRemarkBig;
+}
